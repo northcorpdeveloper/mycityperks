@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+       // $this->middleware('auth');
     }
 
     /**
@@ -41,7 +41,7 @@ class HomeController extends Controller
         $html = '';
         $productList = DB::table('products')->join('users', 'users.id', '=', 'products.user_id')->select('products.*', 'users.name as username')->offset($row)->limit($rowperpage)->get();
         return Response::json($productList);
-    }
+    }  
     
     
     
