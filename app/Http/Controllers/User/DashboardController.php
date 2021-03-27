@@ -13,6 +13,6 @@ class DashboardController extends Controller
     public function index()
     {
         $data=array('aa','ss');      
-        return view('customer.dashboard.index', compact('data'));
+        return view('user.dashboard.index', compact('data'));
     }
 }
