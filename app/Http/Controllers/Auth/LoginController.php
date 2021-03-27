@@ -59,4 +59,10 @@ class LoginController extends Controller
 
         return redirect($this->redirectTo);
     }
+    
+    
+  protected function loggedOut(Request $request) {
+    return redirect('/home');
+}
+
 }

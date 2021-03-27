@@ -100,6 +100,10 @@
 						<i class="icon ion-ios-paper mobile-only"></i>
 							<a class="nav-link" href="#">Support</a>
 						</li>
+                                                <li class="nav-item">
+						<i class="icon ion-ios-paper mobile-only"></i>
+							  <a href="{{ url('/logout') }}"> logout </a>
+						</li>
 					</ul>
 
 				</div>
