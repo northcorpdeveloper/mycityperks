@@ -120,19 +120,20 @@
                         <i class="icon ion-ios-paper mobile-only"></i>
                         <a class="nav-link" href="#">Explore <span class="sr-only">(current)</span></a>
                         </li>
-
-                        <li class="nav-item active">
-                        <i class="icon ion-ios-paper mobile-only"></i>
-                                <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
-                        </li>
+                         <?php  $routeName = Route::currentRouteName();  $userId= Auth::user(); if(isset($userId) && !empty($userId)){ ?>
+                        
                         
                         
                         <li class="nav-item active">
                         <i class="icon ion-ios-paper mobile-only"></i>
                            <a href="{{ url('/logout') }}"> logout </a>
                         </li>
-                        
-
+                         <?php }else{ ?>
+                            <li class="nav-item active">
+                             <i class="icon ion-ios-paper mobile-only"></i>
+                                <a class="nav-link" href="{{ url('/login') }}">Login <span class="sr-only">(current)</span></a>
+                            </li>
+                         <?php } ?>
                         <li class="nav-item active">
                         <i class="icon ion-ios-paper mobile-only"></i>
                                 <a class="nav-link" href="#">Sign up Now <span class="sr-only">(current)</span></a>
