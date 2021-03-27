@@ -62,11 +62,10 @@
                         </div>
                         
                       <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">Are you content creator?</label>
+                             <div class="col-md-4"></div>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+                                <input type="checkbox" id="user_type" name="user_type" value="2"><label for="email" class="col-form-label text-md-right">Are you content creator?</label>
                               
                             </div>
                         </div>

@@ -16,10 +16,15 @@ class User extends Authenticatable
      *
      * @var array
      */
+    
+          
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password','user_type','account_title','escrow_balance','money','withdraw','pending_withdraw',
+        'signup','country','status','account_number','bank_address','expiry_date',
+        'card_name','card_number','user_type','user_state','city'
+        
     ];
 
     /**
