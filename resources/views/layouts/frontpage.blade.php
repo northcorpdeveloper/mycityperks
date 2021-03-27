@@ -129,9 +129,7 @@
                         
                         <li class="nav-item active">
                         <i class="icon ion-ios-paper mobile-only"></i>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    {{ csrf_field() }}
-</form>
+                           <a href="{{ url('/logout') }}"> logout </a>
                         </li>
                         
 
