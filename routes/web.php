@@ -12,16 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::Post('/getproductData', [App\Http\Controllers\HomeController::class, 'getData'])->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+
 
 
 
@@ -32,7 +36,11 @@ Route::middleware(['auth', 'user'])->as('user.')->prefix('user')->group(function
 
 
 
-// user
+
+
+
+// customer 
 Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->group(function () {
-    Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');		
+    Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');	
+    Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');	
 });
