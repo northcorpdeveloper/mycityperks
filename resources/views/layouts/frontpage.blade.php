@@ -125,6 +125,15 @@
                         <i class="icon ion-ios-paper mobile-only"></i>
                                 <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
                         </li>
+                        
+                        
+                        <li class="nav-item active">
+                        <i class="icon ion-ios-paper mobile-only"></i>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>
+                        </li>
+                        
 
                         <li class="nav-item active">
                         <i class="icon ion-ios-paper mobile-only"></i>
