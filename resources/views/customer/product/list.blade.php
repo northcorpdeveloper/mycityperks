@@ -98,6 +98,7 @@ document.getElementById('sub_type').style.display='none';
 }
 </script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function(){
         alert();
@@ -111,7 +112,7 @@ document.getElementById('sub_type').style.display='none';
             $("#row").val(row);
 
             $.ajax({
-                url: 'getproductList',
+                url: '/getproductList',
                 type: 'post',
                 dataType: 'json',
                 data: {
