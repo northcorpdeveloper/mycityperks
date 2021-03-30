@@ -73,6 +73,27 @@ class ProductController extends Controller
 		}
     }
     
+    public function editproduct_by_id(Request $request){
+           $userId= Auth::user()->id;
+           $data=$request->all();
+           $PID=$data['id']; 
+           $products = Product::find($PID);
+           $productCategory = DB::table('tbl_category')->get(); 
+          return view('customer.product.edit', compact('productCategory','products')); 
+    }
+    
+    public function editProduct(Request $request){
+           $userId= Auth::user()->id;
+           $data=$request->all();
+           
+           print_r($data); die;
+           $PID=$data['id']; 
+           $products = Product::find($PID);
+           
+           $productCategory = DB::table('tbl_category')->get(); 
+          return view('customer.product.edit', compact('productCategory','products')); 
+    }
+    
     public function getProductData(Request $request)
     {  
         $userId= Auth::user()->id;
