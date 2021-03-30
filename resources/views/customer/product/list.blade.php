@@ -112,7 +112,7 @@ document.getElementById('sub_type').style.display='none';
             $("#row").val(row);
 
             $.ajax({
-                url: '/getproductList',
+                url: 'getproductList',
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -146,7 +146,7 @@ document.getElementById('sub_type').style.display='none';
                     html += '<div class="card-body">';
                     html += '<div class="mx-auto d-block">';
                     html += '<img class="mx-auto d-block" src="https://mycityperks.com/customer-dashboard/upload/691616397989.jpg" alt="Card image cap">';
-                    html += '<h5 class="text-sm-center mt-2 mb-1"></h5>';
+                    html += '<h5 class="text-sm-center mt-2 mb-1">'+item.+'</h5>';
                     html += '<div class=""></div>';
                             html +='</div>';
                             html +='<hr>';

@@ -13,6 +13,8 @@ use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+
+
 class ProductController extends Controller
 {
     public function index()
