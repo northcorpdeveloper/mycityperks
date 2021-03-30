@@ -57,7 +57,7 @@
                         <a href="#"> <i class="menu-icon fa fa-desktop"></i>Dashboard </a>
                     </li>
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-dashboard"></i>My Account </a>
+                        <a href="{{url('customer/myaccount')}}"> <i class="menu-icon fa fa-dashboard"></i>My Account </a>
                     </li>
                     <li class="">
                         <a href="#"> <i class="menu-icon fa fa-shopping-cart"></i>Orders </a>
@@ -182,30 +182,6 @@
             
     @yield('content')
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-        
-        
         
         
     </div><!-- /#right-panel -->
