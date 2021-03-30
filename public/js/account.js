@@ -1,9 +1,9 @@
 "use strict";
 
 
-
+alert(1);
 function updateAccountDetails(){alert(1);
-    var form_data = $("#accountDetails").serialize();
+    var form_data = $("#accountDetails").serialize();alert(form_data);
     $("#save_account_btn").attr('disabled',true);
     $(".invalid-feedback").hide();
     ajaxSetup();

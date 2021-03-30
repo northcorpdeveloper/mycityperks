@@ -217,7 +217,7 @@
         })(jQuery);
     </script>
     
-    
+    @yield('scripts')
 
 
 </body>
