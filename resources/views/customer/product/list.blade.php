@@ -127,7 +127,7 @@ document.getElementById('sub_type').style.display='none';
                     setTimeout(function() {
                     var html='';
                     $.each(response, function(i, item) {
-                           var maxLength = 60;
+                           var maxLength = 40;
                             var length3 = item.description;
                            var content = length3.length;
                            var shortcontent = '';
@@ -137,26 +137,28 @@ document.getElementById('sub_type').style.display='none';
                                var shortcontent = length3;
                            }
                            
-                           var imgPath='';
+                           if(item.image !="")
+                           {
+                             var imgPath='http://localhost/mycityperks/public/assetcityfront/images/'+item.image;  
+                           }else{
+                               var imgPath='http://localhost/mycityperks/public/assetcityfront/images/p15.jpg';
+                               
+                           }
 
-                    
-                    
                     html +='<div class="col-md-3 post" id="">';
                     html += '<div class="card">';
                     html += '<div class="card-body">';
                     html += '<div class="mx-auto d-block">';
-                    html += '<img class="mx-auto d-block" src="https://mycityperks.com/customer-dashboard/upload/691616397989.jpg" alt="Card image cap">';
-                    html += '<h5 class="text-sm-center mt-2 mb-1">'+item.+'</h5>';
-                    html += '<div class=""></div>';
+                    html += '<img class="mx-auto d-block" src="'+imgPath+'" alt="Card image cap">';
+                    html += '<h5 class="text-sm-center mt-2 mb-1">'+item.name+'</h5>';
+                    html += '<div class="">'+shortcontent+'</div>';
                             html +='</div>';
                             html +='<hr>';
-                            html +='<div class="card-text text-sm-center">';
-                                    
-                            html +='</div>';
+                            html +='<div class="card-text text-sm-center">Price- '+item.price+'$</div>';
                             html +='</div>';
                             html +='<div class="card-footer">';
-                            html +='<button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button>';
-                            html +='<button type="button" class="btn btn-success btn-sm" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>';
+                            html +='<a href="edit?id='+item.id+'"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>';
+                            html +='<a href="delete?id='+item.id+'"><button type="button" class="btn btn-success btn-sm" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button></a>';
                             html +='</div>';
                         html +='</div>';
                     html +='</div>';
