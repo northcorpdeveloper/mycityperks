@@ -43,5 +43,9 @@ Route::middleware(['auth', 'user'])->as('user.')->prefix('user')->group(function
 Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->group(function () {
     Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');	
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
-    Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');	
+    Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');
+    Route::post('create', [App\Http\Controllers\Customer\ProductController::class, 'create'])->name('create');
+    Route::get('list', [App\Http\Controllers\Customer\ProductController::class, 'index'])->name('list');
+    
+    
 });
