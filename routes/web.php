@@ -47,11 +47,7 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::post('create', [App\Http\Controllers\Customer\ProductController::class, 'create'])->name('create');
     Route::get('list', [App\Http\Controllers\Customer\ProductController::class, 'index'])->name('list');
     Route::Post('getproductList', [App\Http\Controllers\Customer\ProductController::class, 'getProductData'])->name('list');
-    
     Route::get('edit', [App\Http\Controllers\Customer\ProductController::class, 'editproduct_by_id'])->name('editproduct_by_id');
-    Route::get('edit', [App\Http\Controllers\Customer\ProductController::class, 'editProduct'])->name('edit');
-    
-    
-    
-    
+    Route::post('editProduct', [App\Http\Controllers\Customer\ProductController::class, 'editProduct'])->name('editProduct');
+
 });

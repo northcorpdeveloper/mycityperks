@@ -85,11 +85,21 @@ class ProductController extends Controller
     public function editProduct(Request $request){
            $userId= Auth::user()->id;
            $data=$request->all();
-           
-           print_r($data); die;
            $PID=$data['id']; 
            $products = Product::find($PID);
            
+                $product->name = $data['name'];
+                $product->product_category = $data['product_category'];
+                $product->image = $data['image'];
+                $product->price = $data['price'];
+                $product->description = $data['description'];
+                $product->type = $data['type'];
+                $product->sub_type = $data['sub_type'];
+                $product->fechadefinalizacion = date('Y-m-d');
+                $product->user_id = $userId;
+                $product->sub_date = date('Y-m-d');
+                $product->save();
+                
            $productCategory = DB::table('tbl_category')->get(); 
           return view('customer.product.edit', compact('productCategory','products')); 
     }
