@@ -46,6 +46,6 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');
     Route::post('create', [App\Http\Controllers\Customer\ProductController::class, 'create'])->name('create');
     Route::get('list', [App\Http\Controllers\Customer\ProductController::class, 'index'])->name('list');
-    
+    Route::Post('getproductList', [App\Http\Controllers\HomeController::class, 'getProductData'])->name('list');
     
 });

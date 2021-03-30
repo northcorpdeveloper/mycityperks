@@ -16,10 +16,14 @@ use Illuminate\Validation\Rule;
 class ProductController extends Controller
 {
     public function index()
-    {    
+    {   
+        $userId= Auth::user()->id;
         $productCategory = DB::table('tbl_category')->get();
-        $productData = DB::table('products')->get();
-        return view('customer.product.list', compact('productCategory','productData'));
+        
+        $allcount = Product::count();
+        $productData = DB::table('products')->join('tbl_category', 'tbl_category.id', '=', 'products.product_category')->select('products.*', 'tbl_category.category_name')->where('products.user_id',$userId)->limit(8)->get()->toArray();
+        //$productData = DB::table('products')->get();
+        return view('customer.product.list', compact('productCategory','productData','allcount'));
     }
     
     public function addproduct()
@@ -66,6 +70,19 @@ class ProductController extends Controller
 			}
 		}
     }
+    
+    public function getProductData(Request $request)
+    {  
+        $userId= Auth::user()->id;
+        $data = $request->all();
+        $row = $data['row'];
+        $rowperpage = 8;
+        $productData = DB::table('products')->join('tbl_category', 'tbl_category.id', '=', 'products.product_category')->select('products.*', 'tbl_category.category_name')->where('products.user_id',$userId)->offset($row)->limit($rowperpage)->get()->toArray();
+        //$productList = DB::table('products')->join('users', 'users.id', '=', 'products.user_id')->select('products.*', 'users.name as username')->offset($row)->limit($rowperpage)->get();
+        return Response::json($productData);
+    } 
+    
+    
     
     
 }

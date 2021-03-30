@@ -7,7 +7,7 @@
         @foreach($productList as $p_val)
         <div class="wow category-1 mix custom-column-5 post" id="post_{{ $p_val->id }}" data-wow-duration="2s">
             <div class="be-post">
-                <a href="page1.html" class="be-img-block">
+                <a href="#" class="be-img-block">
                     <div style="max-height:172px;">
                        <img src="{{ asset('assetcityfront/images/'.$p_val->image) }}" alt="omg">
                     </div>
