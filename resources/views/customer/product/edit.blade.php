@@ -23,14 +23,14 @@
 
         <div class="content mt-3">
 
-            <div class="col-sm-12">
+<!--            <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
                     <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            </div>
+            </div>-->
 
 
             <div class="col-xl-12">
@@ -43,7 +43,7 @@
                             <div class="card-header"><strong>Company</strong><small> Form</small></div>
                             <div class="card-body card-block">
                                 
-                                <form method="post" action="http://localhost/mycityperks/public/customer/editProduct"> 
+                                <form method="post" action="http://localhost/mycityperks/public/customer/editProduct" enctype="multipart/form-data"> 
                                    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
       
                                 <div class="form-group">
@@ -55,7 +55,7 @@
                                     <select name="product_category" id="category_name" class="form-control" required="">
                                         <option value="">select Category</option>
                                         @foreach($productCategory as $product_cat_name)
-                                        <option value="{{ $product_cat_name->id }}" <?php if($product_cat_name->id == $products['product_category']){ echo "selected"; } ?>>{{ $product_cat_name->category_name }}</option>
+                                        <option value="{{ $product_cat_name->id }}" @if($product_cat_name->id == $products['product_category']) selected  @endif >{{ $product_cat_name->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -66,7 +66,7 @@
 
                                 <div class="form-group">
                                     <label for="product_details" class=" form-control-label">Product Details</label>
-                                    <textarea name="description" id="description" class="form-control" value="{{ $products['description'] }}" placeholder="Product Details"></textarea>
+                                    <textarea name="description" id="description" class="form-control" value="{{ $products['description'] }}" placeholder="Product Details">{{ $products['description'] }}</textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -77,8 +77,8 @@
                                 <div class="form-group">
                                     <label for="product_type" class=" form-control-label">Select Product type*</label>
                                     <select class="form-control" id="type" name="type" onchange="return changevaluepro()">
-                                        <option value="product" <?php if($products['type']=="product"){ echo "selected"; } ?>>Simple Product</option>
-                                        <option value="subscriptions" <?php if($products['type']=="subscriptions"){ echo "selected"; } ?>>Subscription Product</option>                  
+                                        <option value="product" @if($products['type'] == "product") selected  @endif >Simple Product</option>
+                                        <option value="subscriptions" @if($products['type']=="subscriptions") selected  @endif >Subscription Product</option>                  
                                     </select>
                                 </div>
                                 
@@ -120,17 +120,13 @@
 
 <script language="javascript" type="text/javascript">
 
-function changevaluepro()
-{
-if(document.getElementById('type').value=='subscriptions')
-{
-document.getElementById('pro').style.display='block';
-document.getElementById('sub_type').style.display='block';
-}
-else
-{
-document.getElementById('pro').style.display='none';
-document.getElementById('sub_type').style.display='none';
-}
-}
+    function changevaluepro(){
+        if(document.getElementById('type').value=='subscriptions'){
+            document.getElementById('pro').style.display='block';
+            document.getElementById('sub_type').style.display='block';
+        }else{
+        document.getElementById('pro').style.display='none';
+        document.getElementById('sub_type').style.display='none';
+        }
+    }
 </script>

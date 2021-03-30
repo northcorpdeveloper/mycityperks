@@ -23,14 +23,14 @@
 
         <div class="content mt-3">
 
-            <div class="col-sm-12">
+<!--            <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
                     <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            </div>
+            </div>-->
 
 
             <div class="content mt-3">
@@ -43,7 +43,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mx-auto d-block">
-                                    <img class="mx-auto d-block" src="https://mycityperks.com/customer-dashboard/upload/691616397989.jpg" alt="Card image cap">
+                                    <img class="mx-auto d-block" src="http://localhost/mycityperks/public/assetcityfront/images/{{ $productList->image }}" alt="Card image cap">
                                     <h5 class="text-sm-center mt-2 mb-1">{{ $productList->name }}</h5>
                                     <div class=""> {{ substr($productList->description,0,40) }}</div>
                                 </div>
@@ -53,8 +53,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button>
-                                <button type="button" class="btn btn-success btn-sm" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>
+                                <a href="edit?id={{ $productList->id }}"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>
+                                <button type="button" class="btn btn-danger btn-sm deleteBTN" data-id="{{ $productList->id }}" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,6 @@ document.getElementById('sub_type').style.display='none';
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function(){
-        alert();
     $('.load-more').click(function(){
         var row = Number($('#row').val());
         var allcount = Number($('#all').val());
@@ -158,7 +157,7 @@ document.getElementById('sub_type').style.display='none';
                             html +='</div>';
                             html +='<div class="card-footer">';
                             html +='<a href="edit?id='+item.id+'"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>';
-                            html +='<a href="delete?id='+item.id+'"><button type="button" class="btn btn-success btn-sm" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button></a>';
+                            html +='<button type="button" class="btn btn-danger btn-sm deleteBTN" data-id="'+item.id+'" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>';
                             html +='</div>';
                         html +='</div>';
                     html +='</div>';
@@ -210,4 +209,30 @@ document.getElementById('sub_type').style.display='none';
 
 });
 
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".deleteBTN").on("click", function(){
+            var pid = $(this).attr("data-id");
+            $.ajax({
+                url: 'deleteProduct',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                        "_token": "{{ csrf_token() }}",   
+                        "pid":pid
+                
+                },
+                success:function(data)
+                {
+                    alert(data);
+                    location.reload();
+                    //$('#student_table').DataTable().ajax.reload();
+                },
+                
+            });
+            
+        });
+    });
 </script>

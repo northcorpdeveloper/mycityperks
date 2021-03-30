@@ -54,7 +54,7 @@
                     </li>
                     <h3 class="menu-title"></h3><!-- /.menu-title -->
                     <li class="active">
-                        <a href="#"> <i class="menu-icon fa fa-desktop"></i>Dashboard </a>
+                        <a href="{{url('customer/dashboard')}}"> <i class="menu-icon fa fa-desktop"></i>Dashboard </a>
                     </li>
                     <li class="">
                         <a href="{{url('customer/myaccount')}}"> <i class="menu-icon fa fa-dashboard"></i>My Account </a>
@@ -71,8 +71,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Products</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="#">Add Product</a></li>
-                            <li><i class="fa fa-table"></i><a href="#">Products</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{url('customer/addproduct')}}">Add Product</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{url('customer/list')}}">Products</a></li>
                         </ul>
                     </li>
                     <li class="">
