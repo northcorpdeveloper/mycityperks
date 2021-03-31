@@ -41,6 +41,7 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     
     Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');	
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
+    Route::post('myaccount/save', [App\Http\Controllers\Customer\MyaccountController::class, 'saveMyAccountData'])->name('savemyaccount');
     
     /* customer product section Start */
     
@@ -64,6 +65,8 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::get('transactions', [App\Http\Controllers\Customer\TransactionController::class, 'index'])->name('transactions');
     
     /* customer Order section end */ 
+    
+    
     
     
 });

@@ -3,7 +3,7 @@
 function ajaxSetup(){
     jQuery.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
         }
     });
 }
@@ -12,14 +12,39 @@ function objectPropertyExists(msg,property){
     return msg.hasOwnProperty(property);
 }
 
-function updateAccountDetails(){alert(1);
-    var form_data = jQuery("#accountDetails").serialize();alert(form_data);
+function getResponseErrors(obj,separator_tag,prefix_elem){
+    var errors = '';
+    if(typeof obj.errors !== 'undefined'){
+        if(typeof obj.errors  === 'string'){
+            errors = obj.errors;
+        }else{
+            if(prefix_elem != ''){
+                $.each( obj.errors, function( key, value) {
+                    $("#"+prefix_elem+key).html(value).show();
+                });
+            }else{
+                $.each( obj.errors, function( key, value) {
+                    errors+=value+separator_tag;
+                });
+            }
+        }
+    }else{
+        if(typeof obj.message !== 'undefined'){
+            errors = obj.message;  
+        }
+    }
+    
+    return errors;
+}
+
+function updateAccountDetails(){
+    var form_data = jQuery("#accountDetails").serialize();
     jQuery("#save_account_btn").attr('disabled',true);
     jQuery(".invalid-feedback").hide();
     ajaxSetup();
 
-    $.ajax({
-        url:ROOT_PATH+"/discount/add",
+    jQuery.ajax({
+        url:ROOT_PATH+"/customer/myaccount/save",
         method:"POST",
         data:form_data,
         success:function(msg){
@@ -28,19 +53,20 @@ function updateAccountDetails(){alert(1);
                 if(msg.status == 'fail'){
                     var errors = getResponseErrors(msg,'<br/>','error_validation_');
                     if(errors != ''){
-                        $("#addDiscountErrorMessage").html(errors).show();
+                        jQuery("#updateDataErrorMessage").html(errors).show();
                     } 
                 }else{ 
-                    $("#addDiscountSuccessMessage").html(msg.message).show();
-                    $("#addDiscountErrorMessage").html('').hide();
-                    setTimeout(function(){ $("#addDiscountDialog").modal('hide'); window.location.reload(); }, 1000);
+                    jQuery("#accountDataUpdatedDialog").modal('show');
+                    jQuery("#addDiscountSuccessMessage").html(msg.message).show();
+                    jQuery("#updateDataErrorMessage").html('').hide();
+                    setTimeout(function(){ window.location.reload(); }, 5000);
                 }
             }else{
-                displayResponseError(msg,'updateDiscountStatusErrorMessage');
+                displayResponseError(msg,'updateDataErrorMessage');
             }
-        },error:function(obj,status,error){
-            $("#save_account_btn").attr('disabled',false);
-            $("#addDiscountErrorMessage").html('Error in processing request').show();
+        },error:function(obj,status,error){alert(11);
+            jQuery("#save_account_btn").attr('disabled',false);
+            jQuery("#updateDataErrorMessage").html('Error in processing request').show();
         }
     });
 }
