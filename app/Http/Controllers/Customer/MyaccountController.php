@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use Validator;
+use Illuminate\Validation\Rule;
 
 class MyaccountController extends Controller
 {
@@ -28,6 +30,15 @@ class MyaccountController extends Controller
         try{
             $data = $request->all();
             $user = Auth::user();
+            
+            $validationRules = array('fname'=>'required','email'=>'required');
+            
+            $attributes = array('fname'=>'Full Name','email'=>'Email Address');
+
+            $validator = Validator::make($data,$validationRules,array(),$attributes);
+            if($validator->fails()){ 
+                return response(array('httpStatus'=>400, "dateTime"=>time(), 'status'=>'fail', 'message'=>'Validation error', 'errors' => $validator->errors()));
+            }	
             
             $updateArray = array('name'=>trim($data['fname']));
             User::where('id',$user->id)->update($updateArray);

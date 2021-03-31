@@ -19,11 +19,11 @@ function getResponseErrors(obj,separator_tag,prefix_elem){
             errors = obj.errors;
         }else{
             if(prefix_elem != ''){
-                $.each( obj.errors, function( key, value) {
-                    $("#"+prefix_elem+key).html(value).show();
+                jQuery.each( obj.errors, function( key, value) {
+                    jQuery("#"+prefix_elem+key).html(value).show();
                 });
             }else{
-                $.each( obj.errors, function( key, value) {
+                jQuery.each( obj.errors, function( key, value) {
                     errors+=value+separator_tag;
                 });
             }
