@@ -57,24 +57,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i=1; ?>
+                                        @if(isset($orderData) && !empty($orderData))
+                                        
+                                        @foreach($orderData as $orderList)
                                         <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>$183,000</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td></td>
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $orderList->transaction_id }}</td>
+                                            <td>{{ $orderList->name }}</td>
+                                            <td>{{ $orderList->amount }}</td>
+                                            <td>{{ $orderList->status }}</td>
+                                            <td>{{ $orderList->datenew }}</td>
+                                            <td><a href="#"><i class="fa fa-eye" style="color:orange;"></i></a> &nbsp; <a href="#"><i class="fa fa-edit" style="color:green;"></i></a> &nbsp;<a href="#"><i class="fa fa-trash" style="color:red;"></i></a></td>
+                                            
                                         </tr>
+                                        
+                                        <?php  $i++; ?>
+                                        @endforeach
+                                        
+                                        @else
                                         <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>$112,000</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td></td>
+                                            <td colspan="7">
+                                            No Records Found !!!!
+                                            </td>
                                         </tr>
+                                          
+                                        @endif
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -103,24 +112,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php $i=1; ?>
+                                    @if(isset($orderData) && !empty($orderData))
+                                        @foreach($orderData as $orderList)
                                         <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>$183,000</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $orderList->transaction_id }}</td>
+                                            <td>{{ $orderList->id }}</td>
+                                            <td>{{ $orderList->amount }}</td>
+                                            <td>{{ $orderList->status }}</td>
+                                            <td>{{ $orderList->datenew }}</td>
                                         </tr>
+                                        <?php  $i++; ?>
+                                        @endforeach
+                                        @else
                                         <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>$112,000</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-
+                                            <td colspan="7">
+                                            No Records Found !!!!
+                                            </td>
                                         </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
