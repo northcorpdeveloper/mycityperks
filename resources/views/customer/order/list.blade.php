@@ -32,7 +32,10 @@
                 </div>
             </div>-->
 
-
+<?php 
+   $userId= Auth::user()->id;
+   $user_type= Auth::user()->user_type;
+?>
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-md-12">
@@ -46,7 +49,7 @@
                                         <tr>
                                             <th>SNo.</th>
                                             <th>Transaction ID</th>
-                                            <th>Vendor / User</th>
+                                            <th>@if($user_type ==2) Vendor @else User @endif</th>
                                             <th>Amount</th>
                                             <th>Status</th>
                                             <th>Date</th>
