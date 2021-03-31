@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
 
+    <link rel="stylesheet" href="vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    
+    
     <link rel="stylesheet" href="assets/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
   
@@ -60,7 +64,7 @@
                         <a href="{{url('customer/myaccount')}}"> <i class="menu-icon fa fa-dashboard"></i>My Account </a>
                     </li>
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-shopping-cart"></i>Orders </a>
+                        <a href="{{url('customer/order-list')}}"> <i class="menu-icon fa fa-shopping-cart"></i>Orders </a>
                     </li>
                     <li class="">
                         <a href="#"> <i class="menu-icon fa fa-money"></i>Add Deposit </a>
@@ -76,7 +80,7 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-credit-card"></i>Transactions </a>
+                        <a href="{{url('customer/transactions')}}"> <i class="menu-icon fa fa-credit-card"></i>Transactions </a>
                     </li>
                     <li class="">
                         <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Subscriptions </a>
@@ -196,6 +200,20 @@
     <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    
+    
+    
+    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="vendors/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
     
     
     <script>

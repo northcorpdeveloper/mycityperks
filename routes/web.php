@@ -36,13 +36,14 @@ Route::middleware(['auth', 'user'])->as('user.')->prefix('user')->group(function
 
 
 
-
-
-
 // customer 
 Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->group(function () {
+    
     Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');	
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
+    
+    /* customer product section Start */
+    
     Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');
     Route::post('create', [App\Http\Controllers\Customer\ProductController::class, 'create'])->name('create');
     Route::get('list', [App\Http\Controllers\Customer\ProductController::class, 'index'])->name('list');
@@ -51,5 +52,18 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::post('editProduct', [App\Http\Controllers\Customer\ProductController::class, 'editProduct'])->name('editProduct');
     Route::post('deleteProduct', [App\Http\Controllers\Customer\ProductController::class, 'deleteProduct'])->name('list');
     
-
+    /*customer product section end*/
+    
+    /* customer Order section start */
+    Route::get('order-list', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('order-list');
+    
+    /* customer Order section end */ 
+    
+    
+    /* customer Order section start */
+    Route::get('transactions', [App\Http\Controllers\Customer\TransactionController::class, 'index'])->name('transactions');
+    
+    /* customer Order section end */ 
+    
+    
 });
