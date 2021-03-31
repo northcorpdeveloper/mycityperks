@@ -1,11 +1,21 @@
 "use strict";
 
+function ajaxSetup(){
+    jQuery.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+}
 
+function objectPropertyExists(msg,property){
+    return msg.hasOwnProperty(property);
+}
 
 function updateAccountDetails(){alert(1);
-    var form_data = $("#accountDetails").serialize();alert(form_data);
-    $("#save_account_btn").attr('disabled',true);
-    $(".invalid-feedback").hide();
+    var form_data = jQuery("#accountDetails").serialize();alert(form_data);
+    jQuery("#save_account_btn").attr('disabled',true);
+    jQuery(".invalid-feedback").hide();
     ajaxSetup();
 
     $.ajax({
@@ -13,7 +23,7 @@ function updateAccountDetails(){alert(1);
         method:"POST",
         data:form_data,
         success:function(msg){
-            $("#save_account_btn").attr('disabled',false);
+            jQuery("#save_account_btn").attr('disabled',false);
             if(objectPropertyExists(msg,'status')){
                 if(msg.status == 'fail'){
                     var errors = getResponseErrors(msg,'<br/>','error_validation_');
