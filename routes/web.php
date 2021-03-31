@@ -42,7 +42,7 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');	
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
     Route::post('myaccount/save', [App\Http\Controllers\Customer\MyaccountController::class, 'saveMyAccountData'])->name('savemyaccount');
-    
+    Route::post('getStateData', [App\Http\Controllers\Customer\MyaccountController::class, 'getStateData'])->name('getStateData');
     /* customer product section Start */
     
     Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');

@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Customer;
-
+use DB;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use Response;
 use Validator;
 use Illuminate\Validation\Rule;
 
@@ -13,12 +14,14 @@ class MyaccountController extends Controller
 {
     
     function index(Request $request){
+        
+            $countriesList = DB::table('tbl_countries')->get();
         try{
             $data = $request->all();
             $user = Auth::user();
             
             $user_data = User::where('id',$user->id)->first();
-            $data = array('user_data'=>$user_data);      
+            $data = array('user_data'=>$user_data, 'countriesList'=>$countriesList);      
             return view('customer.myaccount.index', $data);
             
         }catch (\Exception $e){
@@ -49,4 +52,16 @@ class MyaccountController extends Controller
            return response(array('httpStatus'=>500,"dateTime"=>time(),'status' => 'fail','message' =>$e->getMessage()),500);
         }
     }
+    
+    
+    function getStateData(Request $request){
+            $data = $request->all();
+            $cntID=$data['countryID'];
+            $statesbyID = DB::table('tbl_states')->where('country_id',$cntID)->get();
+            return Response::json($statesbyID);
+            
+    }
+    
+    
+    
 }

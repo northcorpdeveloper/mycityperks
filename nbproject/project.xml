@@ -6,6 +6,7 @@
             <name>mycityperks</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>countriesList</word>
             <word>foreach</word>
         </spellchecker-wordlist>
     </configuration>

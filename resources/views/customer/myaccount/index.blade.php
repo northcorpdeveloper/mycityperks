@@ -53,6 +53,9 @@
                 <div class="input-group">
                     <select class="form-control" id="country" name="country">
                         <option value="">Select Country</option>
+                        @foreach($countriesList as $allcountries)
+                        <option value="{{ $allcountries->id }}">{{ $allcountries->name }}</option>
+                        @endforeach
                     </select>
                                                                         
                 </div>
@@ -69,7 +72,7 @@
             
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" name="city" id="city" value="" class="form-control" placeholder="Enter City Name">
+                    <input type="text" name="city" id="city" value="{{ $user_data->city }}" class="form-control" placeholder="Enter City Name">
 
                 </div>
             </div>
@@ -83,32 +86,32 @@
             <div class="card-header" style="color:#00FF00;font-weight:bold;">Bank Details</div><br>
 		<div class="form-group">
                     <div class="input-group">
-                        <input type="text" id="account_title" value="" name="account_title" placeholder="Account Title" class="form-control">
+                        <input type="text" id="account_title" value="{{ $user_data->account_title }}" name="account_title" placeholder="Account Title" class="form-control">
                     </div>
                 </div>
             
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" id="account_number" value="" name="account_number" placeholder="Account Number" class="form-control">
+                    <input type="text" id="account_number" value="{{ $user_data->account_number }}" name="account_number" placeholder="Account Number" class="form-control">
                 </div>
             </div>
             
             <div class="form-group">
                 <div class="input-group">
-                    <textarea name="bank_address" id="bank_address" class="form-control" placeholder="Bank Address"></textarea>
+                    <textarea name="bank_address" id="bank_address" class="form-control" placeholder="Bank Address">{{ $user_data->bank_address }}</textarea>
                 </div>
             </div>
             
             <div class="card-header" style="color:#00FF00;font-weight:bold;">Credit Card</div><br>
 		<div class="form-group">
                     <div class="input-group">
-                        <input type="text" id="card_name" value="" name="card_name" placeholder="Name on card" class="form-control">        
+                        <input type="text" id="card_name" value="{{ $user_data->card_name }}" name="card_name" placeholder="Name on card" class="form-control">        
                     </div>
                 </div>
             
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" id="card_number" value="" name="card_number" placeholder="Card number" class="form-control">
+                    <input type="text" id="card_number" value="{{ $user_data->card_number }}" name="card_number" placeholder="Card number" class="form-control">
                                                                         
                 </div>
             </div>
@@ -219,10 +222,46 @@
             </div>
         </div>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    var countryID = $('#country').val();
+    alert(countryID);
+    $('#country').change(function(){
+    var countryID = $(this).val(); 
+
+        $.ajax({
+                url: 'getStateData',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                        "_token": "{{ csrf_token() }}",   
+                        "countryID":countryID
+                
+                },
+           success:function(res){               
+            if(res){
+                $("#state").empty();
+                $("#state").append('<option>Select</option>');
+                $.each(res, function(i, item) {
+                    $("#state").append('<option value="'+item.id+'">'+item.name+'</option>');
+                });
+           
+            }else{
+               $("#state").empty();
+            }
+           }
+        });
         
+   });
+
+</script>
+      
  
 @endsection
 
 @section('scripts')
 <script src="{{ asset('js/account.js') }}" ></script>
+
 @endsection
+
+
