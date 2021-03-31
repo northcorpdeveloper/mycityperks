@@ -54,7 +54,7 @@
                     <select class="form-control" id="country" name="country">
                         <option value="">Select Country</option>
                         @foreach($countriesList as $allcountries)
-                        <option value="{{ $allcountries->id }}">{{ $allcountries->name }}</option>
+                        <option value="{{ $allcountries->id }}" @if($allcountries->id == $user_data->country) selected @endif >{{ $allcountries->name }}</option>
                         @endforeach
                     </select>
                                                                         
@@ -225,7 +225,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
     var countryID = $('#country').val();
-    alert(countryID);
     $('#country').change(function(){
     var countryID = $(this).val(); 
 
