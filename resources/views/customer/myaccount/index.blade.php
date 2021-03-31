@@ -33,19 +33,19 @@
 													             
 		<div class="card-body card-block">
             <form id="accountDetails" data-parsley-validate="" class="form-horizontal form-label-left" method="post" name="accountDetails">
-                <div class="alert alert-success alert-dismissible" style="display:none" id="addUserSuccessMessage"></div>
-                <div class="alert alert-danger alert-dismissible" style="display:none" id="addUserErrorMessage"></div>
+                <div class="alert alert-success alert-dismissible" style="display:none" id="updateDataSuccessMessage"></div>
+                <div class="alert alert-danger alert-dismissible" style="display:none" id="updateDataErrorMessage"></div>
             
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" name="fname" id="fname" value="" placeholder="Enter Full Name" class="form-control">
+                    <input type="text" name="fname" id="fname"  placeholder="Enter Full Name" class="form-control" value="{{$user_data->name}}">
                     <div class="invalid-feedback" id="error_validation_fname"></div>
                 </div>
             </div>
                                                                 
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" name="email" id="email" readonly="readonly" value="" class="form-control" placeholder="Enter Your Email">
+                    <input type="text" name="email" id="email" readonly="readonly" value="{{$user_data->email}}" class="form-control" placeholder="Enter Your Email">
                                                                         
                 </div>
             </div>
@@ -175,10 +175,10 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header" style="color:#00FF00;font-weight:bold;">Change Password</div>
-                                                                                                                                                                        <div class="card-body card-block">
-                        <form name="newform" id="change_password_from" class="form-horizontal form-label-left" method="post" action="process.php">
+                        <div class="card-body card-block">
+                            <form name="newform" id="change_password_from" class="form-horizontal form-label-left" method="post" action="process.php">
 
-                        <input type="hidden" value="change_password" name="change_password">
+                                <input type="hidden" value="change_password" name="change_password">
                                 <div class="form-group">
                                     <div class="input-group">
 
@@ -197,6 +197,24 @@
                         </div>
                     </div>
                 </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="accountDataUpdatedDialog" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Success</h5>
+                        
+                    </div>
+                    
+                    <div class="modal-body">
+                        <h5>Account Updated</h5>
+                    </div>
+                    <div class="modal-footer center-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
