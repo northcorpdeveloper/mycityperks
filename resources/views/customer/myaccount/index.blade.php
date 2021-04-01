@@ -3,6 +3,7 @@
 
 @section('content')
   <div class="breadcrumbs">
+      
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
@@ -17,6 +18,14 @@
                             <li class="active">My account</li>
                         </ol>
                     </div>
+                </div>
+            </div>
+      <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert" style="display:none" id="updateDataErrorMessage">
+                   You are successfully logged in to dashboard.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
             </div>
         </div>

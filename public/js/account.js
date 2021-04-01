@@ -53,13 +53,14 @@ function updateAccountDetails(){
                 if(msg.status == 'fail'){
                     var errors = getResponseErrors(msg,'<br/>','error_validation_');
                     if(errors != ''){
-                        jQuery("#updateDataErrorMessage").html(errors).show();
+                        jQuery("#updateDataErrorMessage").html(msg.message).show();
+                          setTimeout(function(){ jQuery("#updateDataErrorMessage").html('').hide(); }, 5000);
                     } 
                 }else{ 
-                    jQuery("#accountDataUpdatedDialog").modal('show');
-                    jQuery("#addDiscountSuccessMessage").html(msg.message).show();
-                    jQuery("#updateDataErrorMessage").html('').hide();
-                    setTimeout(function(){ window.location.reload(); }, 5000);
+                  //  jQuery("#accountDataUpdatedDialog").modal('show');
+                  //  jQuery("#addDiscountSuccessMessage").html(msg.message).show();
+                    jQuery("#updateDataErrorMessage").html(msg.message).show();
+                   setTimeout(function(){ jQuery("#updateDataErrorMessage").html('').hide(); }, 5000);
                 }
             }else{
                 displayResponseError(msg,'updateDataErrorMessage');
