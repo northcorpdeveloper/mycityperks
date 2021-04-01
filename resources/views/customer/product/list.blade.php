@@ -23,6 +23,15 @@
 
         <div class="content mt-3">
 
+                @if (session('status'))
+                  <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;">
+                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                     <strong> {{ session('status') }} </strong>
+                  </div>
+                @endif
+
+
+
 <!--            <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
                     <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
@@ -43,7 +52,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mx-auto d-block">
-                                    <img class="mx-auto d-block" src="http://localhost/mycityperks/public/assetcityfront/images/{{ $productList->image }}" alt="Card image cap">
+                                    <img class="mx-auto d-block" src="{{url('assetcityfront/images/'.$productList->image)}}" alt="Card image cap">
                                     <h5 class="text-sm-center mt-2 mb-1">{{ $productList->name }}</h5>
                                     <div class=""> {{ substr($productList->description,0,40) }}</div>
                                 </div>
@@ -66,9 +75,13 @@
                 
                     <div class="row">
                         <div class="col-md-12" >
+                            @if($allcount > 8)
                             <center> <p class="load-more" style="padding: 5px 0px; font-size: 20px; color: #000 !important; max-width: 500px; cursor:pointer; ">Load More</p></center>
+                             
                              <input type="hidden" id="row" value="0">
                              <input type="hidden" id="all" value="{{ $allcount }}">
+                             
+                            @endif 
                         </div>
                     </div>  
                     <br>
@@ -138,9 +151,9 @@ document.getElementById('sub_type').style.display='none';
                            
                            if(item.image !="")
                            {
-                             var imgPath='http://localhost/mycityperks/public/assetcityfront/images/'+item.image;  
+                             var imgPath='{{url('assetcityfront/images/')}}/'+item.image;  
                            }else{
-                               var imgPath='http://localhost/mycityperks/public/assetcityfront/images/p15.jpg';
+                               var imgPath='{{url('assetcityfront/images/')}}/p15.jpg';
                                
                            }
 

@@ -43,7 +43,7 @@
                             <div class="card-header"><strong>Company</strong><small> Form</small></div>
                             <div class="card-body card-block">
                                 
-                                <form method="post" action="http://localhost/mycityperks/public/customer/create"> 
+                                <form method="post" action="{{url('customer/create')}}" enctype="multipart/form-data"> 
                                    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
       
                                 <div class="form-group">
