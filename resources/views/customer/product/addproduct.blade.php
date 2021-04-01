@@ -2,7 +2,8 @@
 @section('title', ' Dashboard | mycityperks.com')
 
 @section('content')
-  <div class="breadcrumbs">
+   <div class="breadcrumbs">
+      
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
@@ -19,25 +20,20 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="content mt-3">
-
-<!--            <div class="col-sm-12">
-                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert" style="display:none" id="updateDataErrorMessage">
+                   You are successfully logged in to dashboard.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
-            </div>-->
+            </div>
+        </div>
 
 
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            
+        <div class="content mt-3">
+            <div class="animated fadeIn"> 
+                <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header"><strong>Company</strong><small> Form</small></div>
@@ -90,26 +86,18 @@
                                     </select>
                                 </div>
                                 
-                                
-                            </div>
-                            <div class="card-footer" style="text-align: center;">
+                                <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-sm" style="border-radius:5px;min-width: 100px;">
                                     <i class="fa fa-dot-circle-o"></i> Save
                                 </button>
                                 <button type="reset" class="btn btn-danger btn-sm" style="border-radius:5px;min-width: 100px;">
                                     <i class="fa fa-ban"></i> Reset
                                 </button>
+                                </div>
                             </div>
-                            
-                                                      
-                        </form>
-                                
-                        </div>
-                        </div>
-                        </div>
+                          
                        
-                    </div>
-                </div>
+                    </form>
             </div>
 
         </div> <!-- .content -->

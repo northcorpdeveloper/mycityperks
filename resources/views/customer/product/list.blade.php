@@ -52,9 +52,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mx-auto d-block">
-                                    <img class="mx-auto d-block" src="{{url('assetcityfront/images/'.$productList->image)}}" alt="Card image cap">
-                                    <h5 class="text-sm-center mt-2 mb-1">{{ $productList->name }}</h5>
-                                    <div class=""> {{ substr($productList->description,0,40) }}</div>
+                                    <img class="mx-auto d-block" src="{{url('assetcityfront/images/'.$productList->image)}}" alt="Card image cap" style="max-height:165px">
+                                    <h5 class="text-sm-center mt-2 mb-1" style="min-height: 50px;">{{ $productList->name }}</h5>
+                                    <div class="" style="min-height: 50px;"> {{ substr($productList->description,0,40) }}</div>
                                 </div>
                                 <hr>
                                 <div class="card-text text-sm-center">
@@ -157,20 +157,20 @@ document.getElementById('sub_type').style.display='none';
                                
                            }
 
-                    html +='<div class="col-md-3 post" id="">';
+                    html +='<div class="col-md-3 post" id="post_'+item.id+'">';
                     html += '<div class="card">';
                     html += '<div class="card-body">';
                     html += '<div class="mx-auto d-block">';
-                    html += '<img class="mx-auto d-block" src="'+imgPath+'" alt="Card image cap">';
-                    html += '<h5 class="text-sm-center mt-2 mb-1">'+item.name+'</h5>';
-                    html += '<div class="">'+shortcontent+'</div>';
+                    html += '<img class="mx-auto d-block" src="'+imgPath+'" alt="Card image cap" style="max-height:165px">';
+                    html += '<h5 class="text-sm-center mt-2 mb-1" style="min-height: 50px;">'+item.name+'</h5>';
+                    html += '<div class="" style="min-height: 50px;">'+shortcontent+'</div>';
                             html +='</div>';
                             html +='<hr>';
                             html +='<div class="card-text text-sm-center">Price- '+item.price+'$</div>';
                             html +='</div>';
                             html +='<div class="card-footer">';
                             html +='<a href="edit?id='+item.id+'"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>';
-                            html +='<button type="button" class="btn btn-danger btn-sm deleteBTN" data-id="'+item.id+'" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>';
+                            html +='<button type="button" class="btn btn-danger btn-sm deleteBTN " data-id="'+item.id+'" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>';
                             html +='</div>';
                         html +='</div>';
                     html +='</div>';
@@ -235,7 +235,6 @@ document.getElementById('sub_type').style.display='none';
                 data: {
                         "_token": "{{ csrf_token() }}",   
                         "pid":pid
-                
                 },
                 success:function(data)
                 {
@@ -248,4 +247,6 @@ document.getElementById('sub_type').style.display='none';
             
         });
     });
+    
+    
 </script>

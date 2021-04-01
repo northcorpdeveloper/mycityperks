@@ -66,7 +66,10 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     
     /* customer Order section end */ 
     
+    /* customer Order section start */
+    Route::get('deposit', [App\Http\Controllers\Customer\DepositController::class, 'index'])->name('deposit');
     
+    /* customer Order section end */
     
     
 });

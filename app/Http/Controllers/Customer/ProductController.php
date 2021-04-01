@@ -23,7 +23,7 @@ class ProductController extends Controller
         $userId= Auth::user()->id;
         $productCategory = DB::table('tbl_category')->get();
         $allcount = Product::where('user_id',$userId)->where('status',1)->count();
-        $productData = DB::table('products')->join('tbl_category', 'tbl_category.id', '=', 'products.product_category')->select('products.*', 'tbl_category.category_name')->where('products.user_id',$userId)->where('products.status',1)->limit(8)->get()->toArray();
+        $productData = DB::table('products')->join('tbl_category', 'tbl_category.id', '=', 'products.product_category')->select('products.*', 'tbl_category.category_name')->where('products.user_id',$userId)->where('products.status',1)->limit(8)->orderBy('id', 'DESC')->get()->toArray();
         return view('customer.product.list', compact('productCategory','productData','allcount'));
     }
     
@@ -129,7 +129,7 @@ class ProductController extends Controller
         $data = $request->all();
         $row = $data['row'];
         $rowperpage = 8;
-        $productData = DB::table('products')->join('tbl_category', 'tbl_category.id', '=', 'products.product_category')->select('products.*', 'tbl_category.category_name')->where('products.status',1)->where('products.user_id',$userId)->offset($row)->limit($rowperpage)->get()->toArray();
+        $productData = DB::table('products')->join('tbl_category', 'tbl_category.id', '=', 'products.product_category')->select('products.*', 'tbl_category.category_name')->where('products.status',1)->where('products.user_id',$userId)->offset($row)->limit($rowperpage)->orderBy('id', 'DESC')->get()->toArray();
         return Response::json($productData);
     } 
     
@@ -147,11 +147,7 @@ class ProductController extends Controller
         }
         return Response::json($msg);
     } 
-    
-    
-    
-    
-    
+ 
 }
 
 

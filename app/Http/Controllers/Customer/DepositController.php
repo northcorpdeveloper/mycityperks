@@ -21,10 +21,10 @@ class DepositController extends Controller
             
             $user_data = User::where('id',$user->id)->first();
             $data = array('user_data'=>$user_data, 'countriesList'=>$countriesList);      
-            return view('customer.add_deposit.index', $data);
+            return view('customer.deposit.index', $data);
             
         }catch (\Exception $e){
-           return view('customer.add_deposit.index',array('error_message'=>$e->getMessage()));
+           return view('customer.deposit.index',array('error_message'=>$e->getMessage()));
         }
     }
     

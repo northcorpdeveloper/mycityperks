@@ -14,7 +14,6 @@ class MyaccountController extends Controller
 {
     
     function index(Request $request){
-        
             $countriesList = DB::table('tbl_countries')->get();
         try{
             $data = $request->all();
