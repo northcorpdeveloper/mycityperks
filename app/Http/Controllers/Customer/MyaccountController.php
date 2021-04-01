@@ -43,7 +43,7 @@ class MyaccountController extends Controller
                 return response(array('httpStatus'=>400, "dateTime"=>time(), 'status'=>'fail', 'message'=>'Validation error', 'errors' => $validator->errors()));
             }	
             
-            $updateArray = array('name'=>trim($data['fname']),'country'=>$data['country'],'user_state'=>$data['state'],'city'=>$data['city']);
+            $updateArray = array('name'=>trim($data['fname']),'country'=>$data['country'],'user_state'=>$data['state'],'city'=>$data['city'],'zipcode'=>$data['zipcode'],'account_title'=>$data['account_title'],'account_number'=>$data['account_number'],'bank_address'=>$data['bank_address'],'card_name'=>$data['card_name'],'card_number'=>$data['card_number'],'expiry_month'=>$data['month'],'expiry_year'=>$data['year']);
             User::where('id',$user->id)->update($updateArray);
             
             return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'success','message' => 'Account data updated successfully'),201);

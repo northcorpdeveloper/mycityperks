@@ -10,8 +10,10 @@ use Response;
 use App\Models\Product;
 use App\Models\Popular_category;
 use Auth;
-use Illuminate\Support\Facades\Validator;
+use Validator;
 use Illuminate\Validation\Rule;
+
+
 
 
 
@@ -35,12 +37,14 @@ class ProductController extends Controller
         $rules = [
                 'name' => 'required',
 		];
+		
+		
 	$validator = Validator::make($request->all(),$rules);
         if ($validator->fails()) {
             return redirect('customer/addproduct')
             ->withInput()
             ->withErrors($validator);
-	}else{
+	}else{ 
                 $data = $request->input();
                 $request->validate(['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',]);
                 $imageName = time().'.'.$request->image->extension();
@@ -58,9 +62,9 @@ class ProductController extends Controller
                     $product->user_id = $userId;
                     $product->sub_date = date('Y-m-d');
                     $product->save();        
-                    return redirect('customer/addproduct')->with('status',"Insert successfully");
+                    return redirect('customer/list')->with('status',"Insert successfully");
                 }catch(Exception $e){
-                    return redirect('customer/addproduct')->with('failed',"operation failed");
+                    return redirect('customer/addproduct')->with('status',"operation failed");
                 }
 	    }
     }
@@ -78,12 +82,27 @@ class ProductController extends Controller
         $userId= Auth::user()->id;
         $data=$request->all();
         $PID=$data['productID']; 
-        $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-        ]);
+
+        if($files=$request->file('image')){
+            
+        
+        $this->validate($request, [
+        'image' => 'mimes:jpeg,png,bmp,tiff |max:1096',
+          ],
+        $messages = [
+            'required' => 'The :attribute field is required.',
+            'mimes' => 'Only jpeg, png  are allowed.'
+        ]
+        );
+    
+    
     
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('assetcityfront/images'), $imageName);
+        }else{
+            $imageName = $data['old_image'];
+        }
+        
         $product = Product::find($PID);
         $product->name = $data['name'];
         $product->product_category = $data['product_category'];
@@ -95,8 +114,14 @@ class ProductController extends Controller
         $product->fechadefinalizacion = date('Y-m-d');
         $product->user_id = $userId;
         $product->sub_date = date('Y-m-d');
-        $product->save();
-        return redirect()->action([ProductController::class, 'index']);
+        
+        $res=$product->save();
+        if($res){
+          return redirect('customer/list')->with('status',"Updated successfully");  
+        }else{
+          return redirect('customer/edit')->with('status',"operation failed");  
+        }
+        
     }
     
     public function getProductData(Request $request){  

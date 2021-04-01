@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
                 <div class="input-group">
-                    <select class="form-control" id="country" name="country">
+                    <select class="form-control" id="country" name="country" onchange="getCountryStates(this.value,'');">
                         <option value="">Select Country</option>
                         @foreach($countriesList as $allcountries)
                         <option value="{{ $allcountries->id }}" @if($allcountries->id == $user_data->country) selected @endif >{{ $allcountries->name }}</option>
@@ -88,7 +88,7 @@
             
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" name="zipcode" id="zipcode" value="0" class="form-control" placeholder="Enter Zipcode">
+                    <input type="text" name="zipcode" id="zipcode" value="{{ $user_data->zipcode }}" class="form-control" placeholder="Enter Zipcode">
                 </div>
             </div>
             
@@ -129,37 +129,31 @@
                 <div class="col-6">
                     <div class="form-group">
                         <select name="month" id="month" class="demoSelectBox" style="height: 38px;">
-                            <option value="01" selected="selected">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
+                            
+                        <?php for($i=1; $i<13; $i++){ 
+                        
+                           if($i < 10){
+                               $mnt="0".$i;
+                           }else{
+                             $mnt=$i;  
+                           }
+                        
+                        ?>
+                            <option value="{{ $mnt }}"  @if($i==$user_data->expiry_month) selected @endif >{{ $mnt}}</option>
+                         <?php } ?>   
+
 							  
 							  
                         </select> / <select name="year" id="year" class="demoSelectBox" style="height: 38px;">
-                            <option value="2010" selected="selected">2010</option>
-                            <option value="2011">2011</option>
-                            <option value="2012">2012</option>
-                            <option value="2013">2013</option>
-                            <option value="2014">2014</option>
-                            <option value="2015">2015</option>
-                            <option value="2016">2016</option>
-                            <option value="2017">2017</option>
-                            <option value="2018" selected="selected">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020" selected="selected">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                            <option value="2029">2029</option>
-                            <option value="2030">2030</option>
+                            <?php 
+                           
+                              for($y=1980; $y<2035; $y++){ 
+                        
+                           
+                        
+                             ?>
+                            <option value="{{ $y }}" @if($y==$user_data->expiry_year) selected @endif >{{ $y }}</option>
+                         <?php } ?> 
                         </select>
 														
                                                             
@@ -168,7 +162,7 @@
 													
                 <div class="col-6">
                     <div class="form-group">
-                        <input type="text" id="sec_code" value="" name="sec_code" placeholder="Security code" class="form-control">
+                        <input type="text" id="sec_code" value="{{ $user_data->sec_code}}" name="sec_code" placeholder="Security code" class="form-control">
                                                             
                     </div>
                 </div>
@@ -180,6 +174,8 @@
 
 														   
 	</form>
+	
+	         <p id="addDiscountSuccessMessage"></p>
                 </div>
             </div>
          </div>
@@ -233,10 +229,7 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-    var countryID = $('#country').val();
-    $('#country').change(function(){
-    var countryID = $(this).val(); 
-
+    function getCountryStates(countryID, selectedId){
         $.ajax({
                 url: 'getStateData',
                 type: 'post',
@@ -246,12 +239,17 @@
                         "countryID":countryID
                 
                 },
-           success:function(res){               
+           success:function(res){ 
             if(res){
                 $("#state").empty();
                 $("#state").append('<option>Select</option>');
                 $.each(res, function(i, item) {
-                    $("#state").append('<option value="'+item.id+'">'+item.name+'</option>');
+                    if(selectedId == item.id){
+                        var selected="selected";
+                    }else{
+                        var selected="";
+                    }
+                    $("#state").append('<option value="'+item.id+'" '+selected+'>'+item.name+'</option>');
                 });
            
             }else{
@@ -260,10 +258,17 @@
            }
         });
         
-   });
+        
+    }
+
 
 </script>
-      
+
+<script>
+$( document ).ready(function() {
+       getCountryStates("{{$user_data->country}}","{{$user_data->user_state}}"); 
+    });
+</script>    
  
 @endsection
 

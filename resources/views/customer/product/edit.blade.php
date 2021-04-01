@@ -23,6 +23,14 @@
 
         <div class="content mt-3">
 
+                @if (session('status'))
+                  <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;">
+                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                     <strong> {{ session('status') }} </strong>
+                  </div>
+                @endif
+                
+                
 <!--            <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
                     <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
@@ -43,15 +51,15 @@
                             <div class="card-header"><strong>Company</strong><small> Form</small></div>
                             <div class="card-body card-block">
                                 
-                                <form method="post" action="http://localhost/mycityperks/public/customer/editProduct" enctype="multipart/form-data"> 
+                                <form method="post" action="{{url('customer/editProduct')}}" enctype="multipart/form-data"> 
                                    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
       
                                 <div class="form-group">
-                                    <label for="product_name" class="form-control-label">Product Name</label>
-                                    <input type="text" name="name" id="product_name" placeholder="Enter your Product name" value="{{ $products['name'] }}" class="form-control">
+                                    <label for="product_name" class="form-control-label">Product Name*</label>
+                                    <input type="text" name="name" id="product_name" placeholder="Enter your Product name" value="{{ $products['name'] }}" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="product_category" class=" form-control-label">Product Category</label>
+                                    <label for="product_category" class=" form-control-label">Product Category*</label>
                                     <select name="product_category" id="category_name" class="form-control" required="">
                                         <option value="">select Category</option>
                                         @foreach($productCategory as $product_cat_name)
@@ -60,18 +68,21 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Price" class=" form-control-label">Price</label>
-                                    <input type="text" name="price" id="Price" placeholder="0.00" value="{{ $products['price'] }}" class="form-control">
+                                    <label for="Price" class=" form-control-label">Price*</label>
+                                    <input type="text" name="price" id="Price" placeholder="0.00" value="{{ $products['price'] }}" class="form-control" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="product_details" class=" form-control-label">Product Details</label>
-                                    <textarea name="description" id="description" class="form-control" value="{{ $products['description'] }}" placeholder="Product Details">{{ $products['description'] }}</textarea>
+                                    <label for="product_details" class=" form-control-label">Product Details*</label>
+                                    <textarea name="description" id="description" class="form-control" value="{{ $products['description'] }}" placeholder="Product Details" required>{{ $products['description'] }}</textarea>
                                 </div>
 
                                 <div class="form-group">
+                                      <img class="d-block" src="{{url('assetcityfront/images/'.$products->image)}}" alt="Card image cap" style="max-width: 394px; max-height: 200px;">
+                                    
                                     <label for="product_image" class=" form-control-label">Product Image</label>
                                     <input type="file" name="image" id="product_image" placeholder="Product Image" class="form-control">
+                                     <input type="hidden" name="old_image" id="old_product_image" value="{{ $products->image }}" class="form-control">
                                 </div>
  
                                 <div class="form-group">
@@ -94,7 +105,7 @@
                             </div>
                             <div class="card-footer" style="text-align: center;">
                                 
-                                <input type="text" name="productID" value="{{ $products['id'] }}" >
+                                <input type="hidden" name="productID" value="{{ $products['id'] }}" >
                                 <button type="submit" class="btn btn-primary btn-sm" style="border-radius:5px;min-width: 100px;">
                                     <i class="fa fa-dot-circle-o"></i> Update
                                 </button>
