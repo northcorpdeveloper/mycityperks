@@ -34,11 +34,21 @@
                                             <h3 class="text-center">Add Deposit</h3>
                                         </div>
                                         <hr>
-                                        <form method="post" id="logincan" name="logincan" class="form-horizontal form-label-left" action="process.php">
-                                            <input type="hidden" name="user_id" value="14">
-                                            <input type="hidden" name="addpayment" value="addpayment" id="addpayment">
-                                            <input type="hidden" name="username" value="" id="username">
-                                            <input type="hidden" name="email" value="sandeeptcy@gmail.com" id="email">
+                                        <?php /*
+                                        <form action="{{url('customer/charge')}}" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="email" name="email" placeholder="Enter Email" />
+                                            <input type="text" name="amount" placeholder="Enter Amount" />
+                                            <input type="text" name="cc_number" placeholder="Card Number" />
+                                            <input type="text" name="expiry_month" placeholder="Month" />
+                                            <input type="text" name="expiry_year" placeholder="Year" />
+                                            <input type="text" name="cvv" placeholder="CVV" />
+                                            <input type="submit" name="submit" value="Submit" />
+                                        </form>
+                                         */ ?>
+                                        
+                                        <form method="post" id="logincan" name="logincan" class="form-horizontal form-label-left" action="{{url('customer/charge')}}">
+                                            {{ csrf_field() }}
                                             <div class="form-group text-center">
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
@@ -64,13 +74,13 @@
                                                 </div>
 						<div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" id="card-number" value="" name="card-number" placeholder="Card number" class="form-control">
+                                                        <input type="text" id="card-number" value="" name="cc_number" placeholder="Card number" class="form-control">
                                                     </div>
                                                 </div>
                                             
 						<div class="form-group">
                                                     <label for="cc-payment" class="control-label mb-1">Month / Year</label><br>
-                                                    <select name="month" id="month" class="demoSelectBox" style="height: 38px;">
+                                                    <select name="expiry_month" id="month" class="demoSelectBox" style="height: 38px;">
                                                         <option value="01" selected="selected">01</option>
                                                         <option value="02">02</option>
                                                         <option value="03">03</option>
@@ -79,7 +89,7 @@
                                                         <option value="06">06</option>
                                                         <option value="07">07</option>	  
                                                     </select> / 
-                                                    <select name="year" id="year" class="demoSelectBox" style="height: 38px;">
+                                                    <select name="expiry_year" id="year" class="demoSelectBox" style="height: 38px;">
 							<option value="2010">2010</option>
 							<option value="2011">2011</option>
 							<option value="2012">2012</option>
@@ -104,14 +114,14 @@
                                                     </select>   
                                                 </div>
 						<div class="form-group">
-	                                            <input type="text" id="sec_code" value="" name="sec_code" placeholder="Security code" class="form-control">            
+	                                            <input type="text" id="sec_code" value="" name="cvv" placeholder="Security code" class="form-control">            
                                                 </div>
                                                 <div>
                                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                                         <span id="payment-button-amount">Add Deposit</span>
                                                     </button>
                                                 </div>
-                                        </form>
+                                        </form> 
                                     </div>
                                 </div>
 
@@ -125,7 +135,7 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-    function getCountryStates(countryID, selectedId){
+   /* function getCountryStates(countryID, selectedId){
         $.ajax({
                 url: 'getStateData',
                 type: 'post',
@@ -157,20 +167,13 @@
         
     }
 
-
+*/
 </script>
 
-<script>
-$( document ).ready(function() {
-       getCountryStates("{{$user_data->country}}","{{$user_data->user_state}}"); 
-    });
-</script>    
+   
  
 @endsection
 
-@section('scripts')
-<script src="{{ asset('js/account.js') }}" ></script>
 
-@endsection
 
 

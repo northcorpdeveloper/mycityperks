@@ -9,6 +9,7 @@ use Auth;
 use Response;
 use Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class MyaccountController extends Controller
 {
@@ -28,7 +29,7 @@ class MyaccountController extends Controller
         }
     }
     
-    function saveMyAccountData(Request $request){
+     function saveMyAccountData(Request $request){
         try{
             $data = $request->all();
             $user = Auth::user();
@@ -42,7 +43,7 @@ class MyaccountController extends Controller
                 return response(array('httpStatus'=>400, "dateTime"=>time(), 'status'=>'fail', 'message'=>'Validation error', 'errors' => $validator->errors()));
             }	
             
-            $updateArray = array('name'=>trim($data['fname']),'country'=>$data['country'],'user_state'=>$data['state'],'city'=>$data['city'],'zipcode'=>$data['zipcode'],'account_title'=>$data['account_title'],'account_number'=>$data['account_number'],'bank_address'=>$data['bank_address'],'card_name'=>$data['card_name'],'card_number'=>$data['card_number'],'expiry_month'=>$data['month'],'expiry_year'=>$data['year']);
+            $updateArray = array('name'=>trim($data['fname']),'country'=>$data['country'],'user_state'=>$data['state'],'city'=>$data['city'],'zipcode'=>$data['zipcode'],'account_title'=>$data['account_title'],'account_number'=>$data['account_number'],'bank_address'=>$data['bank_address'],'card_name'=>$data['card_name'],'card_number'=>$data['card_number'],'expiry_month'=>$data['month'],'expiry_year'=>$data['year'],'sec_code'=>$data['sec_code']);
             User::where('id',$user->id)->update($updateArray);
             
             return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'success','message' => 'Account data updated successfully'),201);
@@ -60,6 +61,32 @@ class MyaccountController extends Controller
             return Response::json($statesbyID);
             
     }
+    
+     public function updatePassword(Request $request)
+    {
+         try{
+            $data = $request->all();
+            $user = Auth::user();
+            
+            $validationRules = array('password'=>'required');
+            
+            $attributes = array('password'=>'Password');
+
+            $validator = Validator::make($data,$validationRules,array(),$attributes);
+            if($validator->fails()){ 
+
+                return response(array('httpStatus'=>400, "dateTime"=>time(), 'status'=>'fail', 'message'=>'Validation error', 'errors' => $validator->errors()));
+            }	
+            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->password)]);
+            return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'success','message' => 'Password change successfully.'),201);
+            
+        }catch (\Exception $e){
+           return response(array('httpStatus'=>500,"dateTime"=>time(),'status' => 'fail','message' =>$e->getMessage()),500);
+        }
+
+    }
+    
+    
     
     
     

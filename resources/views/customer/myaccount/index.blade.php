@@ -183,24 +183,37 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header" style="color:#00FF00;font-weight:bold;">Change Password</div>
-                        <div class="card-body card-block">
-                            <form name="newform" id="change_password_from" class="form-horizontal form-label-left" method="post" action="process.php">
-
-                                <input type="hidden" value="change_password" name="change_password">
+                        <div class="card-body card-block"> 
+                            
+                            <div class="col-sm-12">
+                                <div class="alert  alert-success alert-dismissible fade show" role="alert" style="display:none" id="PasswordupdateDataSuccessMessage">
+                                   Password change successfully.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <form name="newform" id="change_password_from" class="form-horizontal form-label-left" method="post">
+                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+                            <!--   <input type="hidden" value="change_password" name="change_password">-->
                                 <div class="form-group">
                                     <div class="input-group">
 
-                                <input type="password" name="password" id="password" value="" class="form-control" placeholder="Password" required="required">
+                                        <input type="password" name="password" id="password" value="" class="form-control" placeholder="Password" required="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
 
-                                    <input type="password" name="cpassword" id="cpassword" value="" class="form-control" placeholder="Confirm Password" required="required">
+                                    <input type="password" name="cpassword" id="cpassword" value="" class="form-control" placeholder="Confirm Password" required>
+                                    </div>
+                                    <div class="changePasswordFormAlert" id="CheckPasswordMatch">
+                                        
+                                        
                                     </div>
                                 </div>
-
-                                <div class="form-actions form-group"><button type="submit" class="btn btn-success btn-sm">Change Password</button></div>
+                               
+                                <div class="form-actions form-group"><button type="submit" class="btn btn-success btn-sm" id="chkPassword22">Change Password</button></div>
                             </form>
                         </div>
                     </div>
@@ -227,7 +240,69 @@
             </div>
         </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+  <script>
+    function checkPasswordMatch() {
+        var password = $("#password").val();
+        var confirmPassword = $("#cpassword").val();
+        if (password != confirmPassword)
+            $("#CheckPasswordMatch").html("<p style='color:red;'>Passwords does not match!</p>");
+        else
+            $("#CheckPasswordMatch").html("<p style='color:green;'>Passwords match.</p>");
+    }
+    $(document).ready(function () {
+       $("#cpassword").keyup(checkPasswordMatch);
+    });
+    </script>
+    
+    <script>
+    $(document).ready(function () {
+        $("#change_password_from").submit(function(e){
+        e.preventDefault();
+        $("#CheckPasswordMatch").hide();
+        password = $("#password").val();
+        conformPassword = $("#cpassword").val();
+        
+        if(password == conformPassword){
+        $.ajax({
+                url: "{{url('customer/change-password')}}",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                        "_token": "{{ csrf_token() }}",   
+                        "password":password,
+                        "conformPassword":conformPassword
+                
+                },
+           success:function(res){ 
+            
+                        if(res.status == 'fail'){
+                            var errors = getResponseErrors(msg,'<br/>','error_validation_');
+                            if(errors != ''){
+                                jQuery("#updateDataErrorMessage").html(res.message).show();
+                                  setTimeout(function(){ jQuery("#updateDataErrorMessage").html('').hide(); }, 3000);
+                            }else{ 
+                               jQuery("#updateDataErrorMessage").html(res.message).show();
+                               setTimeout(function(){ jQuery("#updateDataErrorMessage").html('').hide(); }, 3000);
+                            }
+                         }else{
+                            jQuery("#PasswordupdateDataSuccessMessage").html(res.message).show();
+                            //alert(res.message);
+                            setTimeout(function(){ jQuery("#PasswordupdateDataSuccessMessage").html('').hide(); }, 3000);
+                            
+                            
+                         }
+                         $("#change_password_from")[0].reset();
+        }
+    });
+    }else{
+       $("#CheckPasswordMatch").html("<p style='color:red;'>Passwords does not match!</p>");
+    }
+    });
+    });
+    </script>
+    
 <script type="text/javascript">
     function getCountryStates(countryID, selectedId){
         $.ajax({

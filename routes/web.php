@@ -43,6 +43,7 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
     Route::post('myaccount/save', [App\Http\Controllers\Customer\MyaccountController::class, 'saveMyAccountData'])->name('savemyaccount');
     Route::post('getStateData', [App\Http\Controllers\Customer\MyaccountController::class, 'getStateData'])->name('getStateData');
+    Route::post('change-password', [App\Http\Controllers\Customer\MyaccountController::class, 'updatePassword'])->name('change-password');
     /* customer product section Start */
     
     Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');
@@ -68,7 +69,7 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     
     /* customer Order section start */
     Route::get('deposit', [App\Http\Controllers\Customer\DepositController::class, 'index'])->name('deposit');
-    
+    Route::post('charge', [App\Http\Controllers\Customer\DepositController::class, 'charge'])->name('charge');
     /* customer Order section end */
     
     
