@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 use Omnipay\Omnipay;
-use App\Models\Payment;
+use App\Models\Transaction;
 use App\Models\User;
 use Auth;
 use Response;
@@ -64,6 +64,9 @@ class DepositController extends Controller
                 'card' => $creditCard,
             ])->send();
  
+            /*
+             print_r($response->getTransactionReference());
+             die; */
             if($response->isSuccessful()) {
  
                 // Captured from the authorization response.
@@ -79,10 +82,11 @@ class DepositController extends Controller
                 $amount = $request->input('amount');
  
                 // Insert transaction data into the database
-                $isPaymentExist = Payment::where('transaction_id', $transaction_id)->first();
+                $isPaymentExist = Transaction::where('transaction_id', $transaction_id)->first();
  
                 if(!$isPaymentExist)
                 {
+                    /*
                     $payment = new Payment;
                     $payment->transaction_id = $transaction_id;
                     $payment->payer_email = $user->email;
@@ -90,13 +94,23 @@ class DepositController extends Controller
                     $payment->currency = 'USD';
                     $payment->payment_status = 'Captured';
                     $payment->user_id = $user->id;
-                    $res=$payment->save();
+                    $res=$payment->save(); */
                     
-                    if($res){
+
                         $updateArray = array('money'=>$totalcapitalamount);
                         User::where('id',$user->id)->update($updateArray);
-                    }
+
+                    $payment = new Transaction;
+                    $payment->user_id = $user->id;
+                    $payment->type = 'deposit';
+                    $payment->transaction_id = $transaction_id;
+                    $payment->datenew = date('Y-m-d');
+                    $payment->amount = $request->input('amount');
+                    $payment->transactions_type = '2';
                     
+                    $res=$payment->save();
+                    
+                  // "insert into transactions set user_id='".$id."',type='deposit',datenew='".date("Y/m/d")."',amount='".$amount."',transactionid='".$param_value_array['0']."',transactions_type='2'"; 
                     
                 }
  
