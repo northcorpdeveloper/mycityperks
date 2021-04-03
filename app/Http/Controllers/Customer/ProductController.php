@@ -147,7 +147,11 @@ class ProductController extends Controller
         }
         return Response::json($msg);
     } 
- 
+    
+    
+    
+    
+    
 }
 
 

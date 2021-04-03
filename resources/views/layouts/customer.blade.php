@@ -67,10 +67,10 @@
                         <a href="{{url('customer/order-list')}}"> <i class="menu-icon fa fa-shopping-cart"></i>Orders </a>
                     </li>
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-money"></i>Add Deposit </a>
+                        <a href="{{url('customer/deposit')}}"> <i class="menu-icon fa fa-money"></i>Add Deposit </a>
                     </li>
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-credit-card"></i>Withdraw </a>
+                        <a href="{{url('customer/withdraw')}}"> <i class="menu-icon fa fa-credit-card"></i>Withdraw </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Products</a>
@@ -83,7 +83,7 @@
                         <a href="{{url('customer/transactions')}}"> <i class="menu-icon fa fa-credit-card"></i>Transactions </a>
                     </li>
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Subscriptions </a>
+                        <a href="{{url('customer/subscription-list')}}"> <i class="menu-icon fa fa-dashboard"></i>Subscriptions </a>
                     </li>
               
                 </ul>

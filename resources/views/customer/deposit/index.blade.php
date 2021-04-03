@@ -26,7 +26,8 @@
                     <!--/.col-->
                     <div class="col-lg-6">
                         <div class="card">
-                            <div class="card-header">Add Deposit</div>																											  <div class="card-body">
+                            <div class="card-header">Add Deposit</div>
+                            <div class="card-body">
                             <!-- Credit Card -->
                                 <div id="pay-invoice">
                                     <div class="card-body">
@@ -46,6 +47,12 @@
                                             <input type="submit" name="submit" value="Submit" />
                                         </form>
                                          */ ?>
+                                         
+                                         @if(session()->has('message'))
+                                            <div class="alert alert-success" id="successMessage">
+                                                {{ session()->get('message') }}
+                                            </div>
+                                        @endif
                                         
                                         <form method="post" id="logincan" name="logincan" class="form-horizontal form-label-left" action="{{url('customer/charge')}}">
                                             {{ csrf_field() }}
@@ -90,14 +97,14 @@
                                                         <option value="07">07</option>	  
                                                     </select> / 
                                                     <select name="expiry_year" id="year" class="demoSelectBox" style="height: 38px;">
-							<option value="2010">2010</option>
-							<option value="2011">2011</option>
-							<option value="2012">2012</option>
-							<option value="2013">2013</option>
-							<option value="2014">2014</option>
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
-							<option value="2017">2017</option>
+                            							<option value="2010">2010</option>
+                            							<option value="2011">2011</option>
+                            							<option value="2012">2012</option>
+                            							<option value="2013">2013</option>
+                            							<option value="2014">2014</option>
+                            							<option value="2015">2015</option>
+                            							<option value="2016">2016</option>
+                            							<option value="2017">2017</option>
                                                         <option value="2018">2018</option>
                                                         <option value="2019">2019</option>
                                                         <option value="2020">2020</option>
@@ -132,45 +139,14 @@
             </div><!-- .animated -->
         </div>
 
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-   /* function getCountryStates(countryID, selectedId){
-        $.ajax({
-                url: 'getStateData',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                        "_token": "{{ csrf_token() }}",   
-                        "countryID":countryID
-                
-                },
-           success:function(res){ 
-            if(res){
-                $("#state").empty();
-                $("#state").append('<option>Select</option>');
-                $.each(res, function(i, item) {
-                    if(selectedId == item.id){
-                        var selected="selected";
-                    }else{
-                        var selected="";
-                    }
-                    $("#state").append('<option value="'+item.id+'" '+selected+'>'+item.name+'</option>');
-                });
-           
-            }else{
-               $("#state").empty();
-            }
-           }
-        });
-        
-        
-    }
-
-*/
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#successMessage").delay(5000).slideUp(300);
+});
 </script>
 
-   
+
  
 @endsection
 

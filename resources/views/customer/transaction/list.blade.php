@@ -52,20 +52,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
+                                        <?php $i=1; ?>
+                                        @if(isset($transactionData) && !empty($transactionData))
+                                        @foreach($transactionData as $tnxtData)
                                         <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>$183,000</td>
-                                            <td>Javascript Developer</td>
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $tnxtData->transaction_id }}</td>
+                                            <td>{{ $tnxtData->amount }}</td>
+                                            <td style="color:red;">{{ strtoupper($tnxtData->type) }}</td>
+                                            <td>{{ $tnxtData->created_at }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>$112,000</td>
-                                            <td>Javascript Developer</td>
-                                        </tr>
+                                        <?php $i++; ?>
+                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -93,22 +93,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i=1; ?>
+                                        @if(isset($transactionAuthorizeData) && !empty($transactionAuthorizeData))
+                                        @foreach($transactionAuthorizeData as $tnxtAuthorizeData)
                                         <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>$183,000</td>
-                                            <td>Javascript Developer</td>
-
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $tnxtAuthorizeData->transaction_id }}</td>
+                                            <td>{{ $tnxtAuthorizeData->amount }}</td>
+                                            <td style="color:green;">{{ strtoupper($tnxtAuthorizeData->type) }}</td>
+                                            <td>{{ $tnxtAuthorizeData->created_at }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>$112,000</td>
-                                            <td>Javascript Developer</td>
-
-                                        </tr>
+                                        <?php $i++; ?>
+                                        @endforeach
+                                        @endif
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -123,49 +121,6 @@
   </section>
 @stop
 
-<script language="javascript" type="text/javascript">
-function changevaluepro()
-{
-if(document.getElementById('type').value=='subscriptions')
-{
-document.getElementById('pro').style.display='block';
-document.getElementById('sub_type').style.display='block';
-}
-else
-{
-document.getElementById('pro').style.display='none';
-document.getElementById('sub_type').style.display='none';
-}
-}
-</script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-
-<script>
-    $(document).ready(function(){
-        $(".deleteBTN").on("click", function(){
-            var pid = $(this).attr("data-id");
-            $.ajax({
-                url: 'deleteProduct',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                        "_token": "{{ csrf_token() }}",   
-                        "pid":pid
-                
-                },
-                success:function(data)
-                {
-                    alert(data);
-                    location.reload();
-                    //$('#student_table').DataTable().ajax.reload();
-                },
-                
-            });
-            
-        });
-    });
-</script>
 
 

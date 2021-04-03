@@ -126,8 +126,7 @@
             </div>
 
         </div> <!-- .content -->
-  </section>
-@stop
+
 
 <script language="javascript" type="text/javascript">
 
@@ -141,3 +140,5 @@
         }
     }
 </script>
+
+@endsection

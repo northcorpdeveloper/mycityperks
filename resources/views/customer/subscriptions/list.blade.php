@@ -61,10 +61,10 @@
                                     Price-{{ $productList->price }}$
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <a href="edit?id={{ $productList->id }}"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>
-                                <button type="button" class="btn btn-danger btn-sm deleteBTN" data-id="{{ $productList->id }}" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>
-                            </div>
+                            <!--<div class="card-footer">-->
+                            <!--    <a href="edit?id={{ $productList->id }}"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>-->
+                            <!--    <button type="button" class="btn btn-danger btn-sm deleteBTN" data-id="{{ $productList->id }}" style="float: right;"><i class="fa fa-trash"></i>&nbsp; Delete</button>-->
+                            <!--</div>-->
                         </div>
                     </div>
                     
@@ -92,7 +92,6 @@
 
 
         </div> <!-- .content -->
-
 
 <script language="javascript" type="text/javascript">
 function changevaluepro()

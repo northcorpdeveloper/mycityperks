@@ -42,8 +42,8 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::get('dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');	
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
     Route::post('myaccount/save', [App\Http\Controllers\Customer\MyaccountController::class, 'saveMyAccountData'])->name('savemyaccount');
-    Route::post('getStateData', [App\Http\Controllers\Customer\MyaccountController::class, 'getStateData'])->name('getStateData');
     Route::post('change-password', [App\Http\Controllers\Customer\MyaccountController::class, 'updatePassword'])->name('change-password');
+    Route::post('getStateData', [App\Http\Controllers\Customer\MyaccountController::class, 'getStateData'])->name('getStateData');
     /* customer product section Start */
     
     Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');
@@ -67,10 +67,21 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     
     /* customer Order section end */ 
     
+    
     /* customer Order section start */
     Route::get('deposit', [App\Http\Controllers\Customer\DepositController::class, 'index'])->name('deposit');
     Route::post('charge', [App\Http\Controllers\Customer\DepositController::class, 'charge'])->name('charge');
     /* customer Order section end */
     
+    /* customer Order section start */
+    Route::get('withdraw', [App\Http\Controllers\Customer\WithdrawController::class, 'index'])->name('withdraw');
+    Route::get('withdrawal', [App\Http\Controllers\Customer\WithdrawController::class, 'withdrawal'])->name('withdrawal');
+    Route::post('save-widhdrawal', [App\Http\Controllers\Customer\WithdrawController::class, 'save_widhdrawal'])->name('save-widhdrawal');
+    /* customer Order section end */
+    
+    /* customer Subscription section start */
+        Route::get('subscription-list', [App\Http\Controllers\Customer\SubscriptionController::class, 'index'])->name('subscription-list');
+        Route::Post('getproductList', [App\Http\Controllers\Customer\SubscriptionController::class, 'getProductData'])->name('list');
+    /* customer Subscription section start */
     
 });

@@ -27,10 +27,6 @@ class DepositController extends Controller
  
 
     function index(){
-//            $data = $request->all();
-//            $user = Auth::user();
-//            $user_data = User::where('id',$user->id)->first();
-//            $data = array('user_data'=>$user_data);      
             return view('customer.deposit.index');
     }
  
@@ -45,7 +41,6 @@ class DepositController extends Controller
             ]);
            
             $user = Auth::user();
-            //$user_data = User::where('id',$user->id)->first();
             $data = $request->all();
             $money_amount=$user->money;
             $escrow_balance=$user->escrow_balance;
@@ -54,7 +49,6 @@ class DepositController extends Controller
             $amount=$data['amount'];
             $totalcapitalamount=$amount+$money_amount;
 
-            // Generate a unique merchant site transaction ID.
             $transactionId = rand(100000000, 999999999);
  
             $response = $this->gateway->authorize([
@@ -63,13 +57,8 @@ class DepositController extends Controller
                 'transactionId' => $transactionId,
                 'card' => $creditCard,
             ])->send();
- 
-            /*
-             print_r($response->getTransactionReference());
-             die; */
+            
             if($response->isSuccessful()) {
- 
-                // Captured from the authorization response.
                 $transactionReference = $response->getTransactionReference();
  
                 $response = $this->gateway->capture([
@@ -80,26 +69,12 @@ class DepositController extends Controller
  
                 $transaction_id = $response->getTransactionReference();
                 $amount = $request->input('amount');
- 
-                // Insert transaction data into the database
                 $isPaymentExist = Transaction::where('transaction_id', $transaction_id)->first();
  
                 if(!$isPaymentExist)
                 {
-                    /*
-                    $payment = new Payment;
-                    $payment->transaction_id = $transaction_id;
-                    $payment->payer_email = $user->email;
-                    $payment->amount = $request->input('amount');
-                    $payment->currency = 'USD';
-                    $payment->payment_status = 'Captured';
-                    $payment->user_id = $user->id;
-                    $res=$payment->save(); */
-                    
-
-                        $updateArray = array('money'=>$totalcapitalamount);
-                        User::where('id',$user->id)->update($updateArray);
-
+                    $updateArray = array('money'=>$totalcapitalamount);
+                    User::where('id',$user->id)->update($updateArray);
                     $payment = new Transaction;
                     $payment->user_id = $user->id;
                     $payment->type = 'deposit';
@@ -107,20 +82,23 @@ class DepositController extends Controller
                     $payment->datenew = date('Y-m-d');
                     $payment->amount = $request->input('amount');
                     $payment->transactions_type = '2';
-                    
                     $res=$payment->save();
-                    
-                  // "insert into transactions set user_id='".$id."',type='deposit',datenew='".date("Y/m/d")."',amount='".$amount."',transactionid='".$param_value_array['0']."',transactions_type='2'"; 
-                    
                 }
  
-                return "Payment is successful. Your transaction id is: ". $transaction_id;
+ 
+                $msg="Payment is successful. Your transaction id is: ". $transaction_id;
+                return redirect('customer/deposit')->with('message', $msg);
             } else {
                 // not successful
-                return $response->getMessage();
+                $msg= $response->getMessage();
+                
+                 return redirect('customer/deposit')->with('message', $msg);
+ 
             }
         } catch(Exception $e) {
-            return $e->getMessage();
+             $msg= $e->getMessage();
+            return redirect('customer/deposit')->with('message', $msg);
+            
         }
     }
 }
