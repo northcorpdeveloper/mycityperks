@@ -75,6 +75,90 @@
   height: 100%;
   filter: brightness(50%);
 }
+
+
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 400px;
+    
+    .modal-content {
+      padding: 1rem;
+    }
+  }
+}
+
+.modal-header {
+  .close {
+    margin-top: -1.5rem;
+  }
+}
+
+.form-title {
+  margin: -2rem 0rem 2rem;
+}
+
+.btn-round {
+  border-radius: 3rem;
+}
+
+.delimiter {
+  padding: 1rem;  
+}
+
+.social-buttons {
+  .btn {
+    margin: 0 0.5rem 1rem;
+  }
+}
+
+.signup-section {
+  padding: 0.3rem 0rem;
+}
+
+
+
+
+.global-container{
+	height:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #ffffff;
+}
+
+form{
+	padding-top: 5px;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+.card-title{ font-weight:300; }
+
+.btn{
+	font-size: 14px;
+	margin-top:20px;
+}
+
+
+.login-form{ 
+	max-width:330px;
+	margin:10px;
+}
+
+.sign-up{
+	text-align:center;
+	padding:20px 0 0;
+}
+
+.alert{
+	margin-bottom:-30px;
+	font-size: 13px;
+	margin-top:20px;
+}
+.loginfrm{
+margin-top:30px;
+
+}
 </style>
 </head>
 <body>
@@ -130,10 +214,11 @@
                         </li>
                          <?php }else{ ?>
                             <li class="nav-item active">
-                             <i class="icon ion-ios-paper mobile-only"></i>
-                                <a class="nav-link" href="{{ url('/login') }}">Login <span class="sr-only">(current)</span></a>
+                                <i class="icon ion-ios-paper mobile-only"></i>
+                                <a class="nav-link" data-toggle="modal" data-target="#loginModal">Login <span class="sr-only">(current)</span></a>
                             </li>
                          <?php } ?>
+                            
                         <li class="nav-item active">
                         <i class="icon ion-ios-paper mobile-only"></i>
                                 <a class="nav-link" href="#">Sign up Now <span class="sr-only">(current)</span></a>
@@ -197,8 +282,23 @@
         <div class="head-bg-content">
             <h1>Your Best Social Network Template</h1>
             <p>Donec in rhoncus tortor. Sed tristique auctor ligula vel viverra</p>
-            <a class="btn color-1 size-1 hover-1"><i class="fa fa-facebook"></i>sign up via facebook</a>
-            <a class="be-register btn color-3 size-1 hover-6"><i class="fa fa-lock"></i>sign up with email</a>
+            
+            <?php  $routeName = Route::currentRouteName();  $userId= Auth::user(); if(isset($userId) && !empty($userId)){ ?>
+                        
+                     
+                        
+                        <li class="nav-item active">
+                        <i class="icon ion-ios-paper mobile-only"></i>
+                           <a href="{{ url('/logout') }}"> logout </a>
+                        </li>
+                         <?php }else{ ?>
+                        <a class="btn color-1 size-1 hover-1"><i class="fa fa-facebook"></i>sign up via facebook</a>
+                        <a class="be-register btn color-3 size-1 hover-6" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i>sign up with email</a>  
+            <?php } ?>
+                            
+                            
+                            
+            
         </div>	
     </div>
 <div class="container-fluid cd-main-content custom-container">
@@ -641,6 +741,8 @@ var masonryPreloader = document.querySelector('.masonry-preloader');
 });
 
 </script>
+
+
 </body>
 
 </html>
