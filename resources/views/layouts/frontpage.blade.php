@@ -208,21 +208,25 @@ margin-top:30px;
                         
                         
                         
-                        <li class="nav-item active">
+                        <li class="nav-item ">
                         <i class="icon ion-ios-paper mobile-only"></i>
                            <a href="{{ url('/logout') }}"> logout </a>
                         </li>
                          <?php }else{ ?>
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <i class="icon ion-ios-paper mobile-only"></i>
                                 <a class="nav-link" data-toggle="modal" data-target="#loginModal">Login <span class="sr-only">(current)</span></a>
                             </li>
+                            
+                            <li class="nav-item">
+                            <i class="icon ion-ios-paper mobile-only"></i>
+                                    <a class="nav-link" data-toggle="modal" data-target="#signupModal" >Sign up Now <span class="sr-only">(current)</span></a>
+                            </li>
+                        
+                        
                          <?php } ?>
                             
-                        <li class="nav-item active">
-                        <i class="icon ion-ios-paper mobile-only"></i>
-                                <a class="nav-link" href="#">Sign up Now <span class="sr-only">(current)</span></a>
-                        </li>
+                        
 					
                         <li class="nav-item">
                         <i class="icon ion-ios-paper mobile-only"></i>
@@ -293,7 +297,7 @@ margin-top:30px;
                         </li>
                          <?php }else{ ?>
                         <a class="btn color-1 size-1 hover-1"><i class="fa fa-facebook"></i>sign up via facebook</a>
-                        <a class="be-register btn color-3 size-1 hover-6" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i>sign up with email</a>  
+                        <a class="be-register btn color-3 size-1 hover-6" data-toggle="modal" data-target="#signupModal"><i class="fa fa-lock"></i>sign up with email</a>  
             <?php } ?>
                             
                             
