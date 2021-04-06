@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +24,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::Post('/getproductData', [App\Http\Controllers\HomeController::class, 'getData'])->name('home');
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
-
+Route::get('auth/google', 'App\Http\Controllers\Auth\GoogleController@redirectToGoogle');
+Route::get('mycityperks/public/auth/google/callback', 'App\Http\Controllers\Auth\GoogleController@handleGoogleCallback');
 
 
 

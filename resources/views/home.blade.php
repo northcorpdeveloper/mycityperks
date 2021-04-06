@@ -126,20 +126,107 @@
       </div>
   </div>
 </div>
- 
+</div>
     
-    
+
+
+<div class="modal fade loginfrm" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="margin: 10px 10%;">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body login-form">
+        <div class="form-title text-center">
+<!--          <h4>Login</h4>-->
+        </div>
+        <div class="d-flex flex-column global-container">
+            
+			<form method="POST" action="{{ route('register') }}">
+                        @csrf
+				<!-- to error: add class "has-danger" -->
+				<div class="form-group">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group">
+                                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                
+				<div class="form-group">
+					 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+				</div>
+                                
+                                <div class="form-group">
+
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+
+				</div>
+                                
+                                <div class="form-group">
+					  <input type="checkbox" id="user_type" name="user_type" value="2"><label for="email" class="col-form-label text-md-right">Are you content creator?</label>
+				</div>
+                                
+                                
+
+                                <div class="form-group " style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary" style="width:150px; padding:10px 2px;">
+                                    {{ __('Register') }}
+                                    </button> 
+                                    
+				</div>
+                    </form>
+      </div>
+    </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <div class="signup-section">Not a member yet? <a href="#" class="text-info"> Sign Up</a>.</div>
+      </div>
+  </div>
+</div>
+</div>
+
     
     <script>
-//     $(document).ready(function() { 
-//         $('#loginModal').modal('show');
-//        $(function () {
-//            $('[data-toggle="tooltip"]').tooltip()
-//          })
-//        });
+     $(document).ready(function() { 
+         $('#signupModal').modal('show');
+         $('#loginModal').modal('hide');
+        $(function () {
+           $('[data-toggle="tooltip"]').tooltip()
+          })
+        });
     
     
     </script>  
+    
+    <script>
+     $(document).ready(function() { 
+         $('#signupModal').modal('hide');
+         $('#loginModal').modal('show');
+        $(function () {
+           $('[data-toggle="tooltip"]').tooltip()
+          })
+        });
+    
+    
+    </script>
  
 
 

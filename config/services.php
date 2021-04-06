@@ -32,9 +32,9 @@ return [
     
 
     'google' => [
-        'client_id' => '767849055356-l47r0d3h230hhns0l4l5o8ol9iofdsu7.apps.googleusercontent.com',
-        'client_secret' => 'seqABIC3VLSdY2VYDb69e-NP',
-        'redirect' => 'http://localhost:8000/auth/google/callback',
+        'client_id' => '767849055356-ccn8fni6uk25nifkumte24oc5db5kivu.apps.googleusercontent.com',
+        'client_secret' => 'Oq_q7RyMEP2DS3nv8w826scL',
+        'redirect' => 'http://localhost/mycityperks/public/auth/google/callback',
     ],
 
 ];
