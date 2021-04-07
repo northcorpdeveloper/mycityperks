@@ -52,6 +52,11 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     
     
     Route::post('getStateData', [App\Http\Controllers\Customer\MyaccountController::class, 'getStateData'])->name('getStateData');
+    
+    Route::post('phone-varification', [App\Http\Controllers\Customer\MyaccountController::class, 'phoneVarification'])->name('phone-varification');
+    
+    
+    
     /* customer product section Start */
     
     Route::get('addproduct', [App\Http\Controllers\Customer\ProductController::class, 'addproduct'])->name('addproduct');

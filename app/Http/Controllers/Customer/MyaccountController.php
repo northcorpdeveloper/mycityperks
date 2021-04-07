@@ -132,9 +132,23 @@ class MyaccountController extends Controller
     }
     
     
-    
-    
-    
-    
+    public function phoneVarification(Request $request)
+    {
+         try{
+            $data2 = $request->all();
+            $user = Auth::user();
+            $user_data = User::where('id',$user->id)->where('verification_code',$request->fullotp)->first();
+            if($user_data){
+                User::find(auth()->user()->id)->update(['is_verification'=> 1]);
+                return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'success','message' => 'Verified successfully.'),201);
+            }else{
+                return response(array('httpStatus'=>200, 'dateTime'=>time(), 'status'=>'fail','message' => 'Wrong OTP'),200); 
+            }
+        }catch (\Exception $e){
+           return response(array('httpStatus'=>500,"dateTime"=>time(),'status' => 'fail','message' =>$e->getMessage()),500);
+        }
+
+    }
+
     
 }
