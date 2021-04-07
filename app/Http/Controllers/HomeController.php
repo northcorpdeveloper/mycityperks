@@ -7,6 +7,8 @@ use Response;
 use Illuminate\Http\Request; 
 use App\Models\Product;
 use App\Models\Popular_category;
+
+use App\Models\HomeCategory;
 class HomeController extends Controller
 {
     /**
@@ -29,7 +31,13 @@ class HomeController extends Controller
         $PopularCategory = DB::table('tbl_category')->get();
         $allcount = Product::count();
         $productList = DB::table('products')->join('users', 'users.id', '=', 'products.user_id')->select('products.*', 'users.name as username')->limit(8)->get()->toArray();
-        return view('home',compact('productList','allcount','PopularCategory'));
+       
+        $homeCatArrayData = HomeCategory::select('name','id', 'cat_key')->where('order','<=', '4')->get();	       
+        $homeCatMoreArrayData = HomeCategory::select('cat_key','name','id')->where('order','>', '4')->get();	 
+
+        
+        
+        return view('home',compact('productList','allcount','PopularCategory','homeCatArrayData','homeCatMoreArrayData'));
     }
     
     

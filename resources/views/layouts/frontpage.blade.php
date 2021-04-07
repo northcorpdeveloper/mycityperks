@@ -250,8 +250,8 @@ margin-top:30px;
         <!-- Actual search box -->
         <form class="form-inline my-2 my-lg-0 ml-8 form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control mr-sm-2 searchh" placeholder="Search for Perks">
-                <input type="text" class="form-control mr-sm-2 nearr" placeholder="Nearby">
+                <input type="text" class="form-control mr-sm-2 searchh" style="width:75%;color: white;" placeholder="Search for Perks">  <!--
+                <input type="text" class="form-control mr-sm-2 nearr" placeholder="Nearby"> -->
                 <input type="submit" class="form-control mr-sm-2" name="Go" value="Go" id="Go">
         </form>
 </nav>
@@ -262,13 +262,23 @@ margin-top:30px;
 <div class="col-md-12">
 <div class="submenu">
 <ul>
+         @foreach($homeCatArrayData as $catList)
+                 <li><a href="{{ $catList->cat_key }}">{{ $catList->name }}</a></li>             
+         @endforeach
+         <!--
 <li><a href="#">cars &amp; Tructs</a></li>
 <li><a href="#">Lorem Ispum</a></li>
 <li><a href="#">Furniture</a></li>
 <li><a href="#">Baby &amp; Kids</a></li>
 <li class="moresub"><a href="#">More</a><i class="fa fa-caret-down"></i>
-
+--><li class="moresub"><a href="#">More</a><i class="fa fa-caret-down"></i>
 <ul class="submenuarea">
+    @foreach($homeCatMoreArrayData as $catMoreList)
+                 <li><a href="{{ $catMoreList->cat_key }}">{{ $catMoreList->name }}</a></li>    
+                 
+         @endforeach
+         
+    <!--
 <li><a href="#">Nav Menu Item</a></li>
 <li><a href="#">Nav Menu Item</a></li>
 <li><a href="#">Nav Menu Item</a></li>
@@ -280,7 +290,7 @@ margin-top:30px;
 <li><a href="#">Nav Menu Item</a></li>
 <li><a href="#">Nav Menu Item</a></li>
 <li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
+<li><a href="#">Nav Menu Item</a></li> -->
 </ul></li>
 
 </ul>
