@@ -11,6 +11,11 @@ use Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
+
+use Twilio\Rest\Client;
+use Twilio\Jwt\ClientToken;
+
+
 class MyaccountController extends Controller
 {
     
@@ -150,5 +155,38 @@ class MyaccountController extends Controller
 
     }
 
+      
+    
+    public function sendSms(Request $request)
+    {
+        
+        
+        $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+        $authToken  = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+        $appSid     = config('app.twilio')['TWILIO_APP_SID'];
+        $client = new Client($accountSid, $authToken);
+        try
+        {
+            $otpcode = $request->otpcode;
+            $mobileno = "+91".$request->mobileno;
+            
+            $client->messages->create(
+            // the number you'd like to send the message to
+                $mobileno ,
+           array(
+                 // A Twilio phone number you purchased at twilio.com/console
+                 'from' => '+12673961067',
+                 // the body of the text message you'd like to send
+                 'body' => 'Verification Code is '.$otpcode
+             )
+         );
+            
+        }catch (Exception $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
+    
+    
     
 }

@@ -55,7 +55,7 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     
     Route::post('phone-varification', [App\Http\Controllers\Customer\MyaccountController::class, 'phoneVarification'])->name('phone-varification');
     
-    
+    Route::post('sendotp', [App\Http\Controllers\Customer\MyaccountController::class, 'sendSms'])->name('sendotp');
     
     /* customer product section Start */
     

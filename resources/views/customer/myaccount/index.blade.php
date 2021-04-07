@@ -177,7 +177,7 @@
                         <div class="input-group">
                             @if($user_data->is_verification !=1)
                                 
-                            <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal">
+                            <button type="button" id="sendOTPbtn" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal">
                             Click and Verify
                             </button>
                             @else
@@ -426,7 +426,34 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
-<script>  
+<script> 
+    
+    
+$("#sendOTPbtn").click(function(e) {
+    e.preventDefault();
+     otpcode = $("#oldverification_code").val();
+     mobileno = $("#oldmobile").val();
+
+        $.ajax({
+            url: "{{url('customer/sendotp')}}",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                    "_token": "{{ csrf_token() }}",   
+                    "otpcode":otpcode,
+                    "mobileno":mobileno
+            },
+        success: function(result) {
+            alert('ok');
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+
+
+
 /*
 $(function() {
   'use strict';
@@ -477,7 +504,7 @@ $(function() {
 */
  </script>
  
- 
+
 
   <script>
     function checkPasswordMatch() {
