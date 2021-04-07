@@ -9,7 +9,7 @@
             <div class="be-post">
                 <a href="#" class="be-img-block">
                     <div style="max-height:172px;">
-                       <img src="{{ asset('assetcityfront/images/'.$p_val->image) }}" alt="omg">
+                       <img src="https://mycityperks.com/assetcityfront/images/{{$p_val->image }}" alt="omg">
                     </div>
                 </a>
                 <a href="#" class="be-post-title">{{ $p_val->name }}</a>

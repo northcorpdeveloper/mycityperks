@@ -410,18 +410,7 @@
 
 
 <script>  
-$( document ).ready(function() {
-  
-  $('#Modal').modal('hide');
-
-
-  $('h1').on('click', function(){
-    $('#Modal').modal('show');
-  });
-
-});
-
-
+/*
 $(function() {
   'use strict';
 
@@ -468,7 +457,7 @@ $(function() {
 
 });
 
-
+*/
  </script>
  
  
