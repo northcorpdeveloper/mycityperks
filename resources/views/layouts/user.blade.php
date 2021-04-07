@@ -76,10 +76,10 @@
 					
 					
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-						<i class="icon ion-ios-paper mobile-only"></i>
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-						</li>
+						<!--<li class="nav-item active">-->
+						<!--<i class="icon ion-ios-paper mobile-only"></i>-->
+						<!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+						<!--</li>-->
 						<li class="nav-item active">
 						<i class="icon ion-ios-paper mobile-only"></i>
 						<a class="nav-link" href="#">Messages <span class="sr-only">(current)</span></a>
@@ -100,7 +100,15 @@
 						<i class="icon ion-ios-paper mobile-only"></i>
 							<a class="nav-link" href="#">Support</a>
 						</li>
-                                                <li class="nav-item">
+						
+						
+						
+						<li class="nav-item">
+						<i class="icon ion-ios-paper mobile-only"></i>
+							  <a href="{{ url('user/dashboard') }}"> Dashboard </a>
+						</li>
+						
+                        <li class="nav-item">
 						<i class="icon ion-ios-paper mobile-only"></i>
 							  <a href="{{ url('/logout') }}"> logout </a>
 						</li>

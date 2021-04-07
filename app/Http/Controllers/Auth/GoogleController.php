@@ -1,7 +1,7 @@
 <?php
   
 namespace App\Http\Controllers\Auth;
-  
+use App\Passport\Passport;  
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
@@ -21,6 +21,8 @@ class GoogleController extends Controller
      */
     public function redirectToGoogle()
     {
+        
+       // die("redirectToGoogle");
         return Socialite::driver('google')->redirect();
     }
         
@@ -35,25 +37,26 @@ class GoogleController extends Controller
       
             $user = Socialite::driver('google')->user();
        
-            $finduser = User::where('google_id', $user->id)->first();
+            $finduser = User::where('email', $user->email)->first();
        
             if($finduser){
        
                 Auth::login($finduser);
       
-                return redirect()->intended('dashboard');
+                return redirect()->intended('user/dashboard');
        
             }else{
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->id,
-                    'password' => encrypt('123456dummy')
+                    'password' => md5('123456789'),
+                    'user_type'=>1
                 ]);
       
                 Auth::login($newUser);
       
-                return redirect()->intended('dashboard');
+                return redirect()->intended('user/dashboard');
             }
       
         } catch (Exception $e) {

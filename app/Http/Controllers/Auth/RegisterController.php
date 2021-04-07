@@ -65,7 +65,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {  
       $user_type =1;
-        if(isset($data['user_type'])){  $user_type=$data['user_type']; }
+        $this->redirectTo = 'user/dashboard';
+        
+        if(isset($data['user_type'])){  $user_type=$data['user_type'];  $this->redirectTo = 'customer/dashboard'; }
     
         return User::create([
             'name' => $data['name'],

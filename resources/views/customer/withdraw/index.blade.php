@@ -65,14 +65,15 @@
                                    <?php $i++; ?>
                                    @endforeach
                                 
-                                @endif
                                 
                                 
+                                @else
                                 
     							<tr>
                                     <td colspan="5" style="text-align:center;">No Records Found </td>
                                 </tr>
                       
+                               @endif
                             </tbody>
                         </table>
                     </div>

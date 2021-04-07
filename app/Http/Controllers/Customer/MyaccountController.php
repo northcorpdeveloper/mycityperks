@@ -41,9 +41,29 @@ class MyaccountController extends Controller
             $validator = Validator::make($data,$validationRules,array(),$attributes);
             if($validator->fails()){ 
                 return response(array('httpStatus'=>400, "dateTime"=>time(), 'status'=>'fail', 'message'=>'Validation error', 'errors' => $validator->errors()));
-            }	
+            }
             
-            $updateArray = array('name'=>trim($data['fname']),'country'=>$data['country'],'user_state'=>$data['state'],'city'=>$data['city'],'zipcode'=>$data['zipcode'],'account_title'=>$data['account_title'],'account_number'=>$data['account_number'],'bank_address'=>$data['bank_address'],'card_name'=>$data['card_name'],'card_number'=>$data['card_number'],'expiry_month'=>$data['month'],'expiry_year'=>$data['year'],'sec_code'=>$data['sec_code']);
+            
+            $oldmobile=$data['oldmobile'];
+            $newmobile=$data['mobile'];
+            if($oldmobile == $newmobile){
+                //$is_verification =1;
+                
+                $verification_code =$data['oldverification_code'];
+                
+                $is_verification =$data['is_verification_old'];
+                
+                
+                
+            }else{
+                $is_verification =0;
+                
+                $fourRandomDigit = mt_rand(1000,9999);
+                $verification_code =$fourRandomDigit;
+                
+            }
+            
+            $updateArray = array('name'=>trim($data['fname']),'country'=>$data['country'],'user_state'=>$data['state'],'city'=>$data['city'],'zipcode'=>$data['zipcode'],'account_title'=>$data['account_title'],'account_number'=>$data['account_number'],'bank_address'=>$data['bank_address'],'card_name'=>$data['card_name'],'card_number'=>$data['card_number'],'expiry_month'=>$data['month'],'expiry_year'=>$data['year'],'sec_code'=>$data['sec_code'],'mobile'=>$data['mobile'],'is_verification'=>$is_verification,'verification_code'=>$verification_code);
             User::where('id',$user->id)->update($updateArray);
             
             return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'success','message' => 'Account data updated successfully'),201);
@@ -85,6 +105,33 @@ class MyaccountController extends Controller
         }
 
     }
+    
+    
+    public function updateMobile(Request $request)
+    {
+         try{
+            $data2 = $request->all();
+            $user = Auth::user();
+            
+            $validationRules = array('mobile'=>'required');
+            
+            $attributes = array('mobile'=>'Mobile');
+
+            $validator = Validator::make($data,$validationRules,array(),$attributes);
+            if($validator->fails()){ 
+
+                return response(array('httpStatus'=>400, "dateTime"=>time(), 'status'=>'fail', 'message'=>'Validation error', 'errors' => $validator->errors()));
+            }	
+            User::find(auth()->user()->id)->update(['mobile'=> $request->mobile]);
+            return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'success','message' => 'Password change successfully.'),201);
+            
+        }catch (\Exception $e){
+           return response(array('httpStatus'=>500,"dateTime"=>time(),'status' => 'fail','message' =>$e->getMessage()),500);
+        }
+
+    }
+    
+    
     
     
     

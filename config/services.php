@@ -30,11 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     
-
     'google' => [
         'client_id' => '767849055356-ccn8fni6uk25nifkumte24oc5db5kivu.apps.googleusercontent.com',
         'client_secret' => 'Oq_q7RyMEP2DS3nv8w826scL',
-        'redirect' => 'http://localhost/mycityperks/public/auth/google/callback',
+        'redirect' => 'https://mycityperks.com/auth/google/callback',
     ],
+    
+    
 
 ];

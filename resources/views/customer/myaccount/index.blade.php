@@ -2,6 +2,102 @@
 @section('title', ' Dashboard | mycityperks.com')
 
 @section('content')
+
+  <style>
+  
+  #wrapper {
+  font-family: Lato;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+  color: #333;
+  }
+  
+  #dialog {
+    
+    
+    padding: 20px 30px;
+    display: inline-block;
+    box-shadow: 0 0 4px #ccc;
+    background-color: #FAF8F8;
+    overflow: hidden;
+    position: relative;
+    max-width: 550px;
+    
+    h3 {
+      margin: 0 0 10px;
+      padding: 0;
+      line-height: 1.25;
+    }
+    
+    span {
+      font-size: 90%;
+    }
+    
+    #form {
+      max-width: 240px;
+      margin: 25px auto 0;
+      
+      input {
+        margin: 0 5px;
+        text-align: center;
+        line-height: 80px;
+        font-size: 50px;
+        border: solid 1px #ccc;
+        box-shadow: 0 0 5px #ccc inset;
+        outline: none;
+        width: 20%;
+        transition: all .2s ease-in-out;
+        border-radius: 3px;
+        
+        &:focus {
+          border-color: purple;
+          box-shadow: 0 0 5px purple inset;
+        }
+        
+        &::selection {
+          background: transparent;
+        }
+      }
+      
+      button {
+        margin:  30px 0 50px;
+        width: 100%;
+        padding: 6px;
+        background-color: #B85FC6;
+        border: none;
+        text-transform: uppercase;
+      }
+    }
+    
+    button {
+      &.close {
+        border: solid 2px;
+        border-radius: 30px;
+        line-height: 19px;
+        font-size: 120%;
+        width: 22px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+      }           
+    }
+    
+    div {
+      position: relative;
+      z-index: 1;
+    }
+    
+    img {
+      position: absolute;
+      bottom: -70px;
+      right: -63px;
+    }
+  }
+}
+
+
+  </style>
   <div class="breadcrumbs">
       
             <div class="col-sm-4">
@@ -58,6 +154,39 @@
                                                                         
                 </div>
             </div>
+            
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" name="mobile" id="mobile" value="{{$user_data->mobile}}" class="form-control" placeholder="mobile">
+                            
+                            <input type="hidden" name="oldmobile" id="oldmobile" value="{{$user_data->mobile}}" class="form-control">
+                            
+                            <input type="hidden" name="oldverification_code" id="oldverification_code" value="{{$user_data->verification_code}}" class="form-control">
+                            
+                            <input type="hidden" name="is_verification_old" id="is_verification_old" value="{{$user_data->is_verification}}" class="form-control">
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            @if($user_data->is_verification !=1)
+                                
+                            <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal">
+                            Click and Verify
+                            </button>
+                            @else
+                            
+                            <label style="color:green; font-size:15px;">Verified</label>
+                            @endif
+                        </div>
+                    </div> 
+                </div>
+                
+            </div>
+            
+            
             <div class="form-group">
                 <div class="input-group">
                     <select class="form-control" id="country" name="country" onchange="getCountryStates(this.value,'');">
@@ -181,6 +310,7 @@
          </div>
 
                 <div class="col-lg-6">
+
                     <div class="card">
                         <div class="card-header" style="color:#00FF00;font-weight:bold;">Change Password</div>
                         <div class="card-body card-block"> 
@@ -217,9 +347,42 @@
                             </form>
                         </div>
                     </div>
+
                 </div>
                 </div>
+
+                
             </div>
+            
+            
+            <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div id="wrapper">
+                                  <div id="dialog">
+                                    <button class="close">×</button>
+                                    <h5>Please enter the 4-digit verification code we sent via SMS:</h5>
+                                    <span>(we want to make sure it's you before we contact our movers)</span>
+                                    <div id="form">
+                                      <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                      <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                      <button class="btn btn-primary btn-embossed">Verify</button>
+                                    </div>
+                                    
+                                    <div>
+                                      Didn't receive the code?<br />
+                                      <a href="#">Send code again</a><br />
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
         </div>
 
         <div class="modal fade" id="accountDataUpdatedDialog" tabindex="-1" role="dialog" aria-hidden="true">
@@ -239,9 +402,77 @@
                 </div>
             </div>
         </div>
+        
+        
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+<script>  
+$( document ).ready(function() {
   
+  $('#Modal').modal('hide');
+
+
+  $('h1').on('click', function(){
+    $('#Modal').modal('show');
+  });
+
+});
+
+
+$(function() {
+  'use strict';
+
+  var body = $('body');
+
+  function goToNextInput(e) {
+    var key = e.which,
+      t = $(e.target),
+      sib = t.next('input');
+
+    if (key != 9 && (key < 48 || key > 57)) {
+      e.preventDefault();
+      return false;
+    }
+
+    if (key === 9) {
+      return true;
+    }
+
+    if (!sib || !sib.length) {
+      sib = body.find('input').eq(0);
+    }
+    sib.select().focus();
+  }
+
+  function onKeyDown(e) {
+    var key = e.which;
+
+    if (key === 9 || (key >= 48 && key <= 57)) {
+      return true;
+    }
+
+    e.preventDefault();
+    return false;
+  }
+  
+  function onFocus(e) {
+    $(e.target).select();
+  }
+
+  body.on('keyup', 'input', goToNextInput);
+  body.on('keydown', 'input', onKeyDown);
+  body.on('click', 'input', onFocus);
+
+});
+
+
+ </script>
+ 
+ 
+
   <script>
     function checkPasswordMatch() {
         var password = $("#password").val();

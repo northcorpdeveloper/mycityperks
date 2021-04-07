@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::Post('/getproductData', [App\Http\Controllers\HomeController::class, 'getData'])->name('home');
-Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('auth/google', 'App\Http\Controllers\Auth\GoogleController@redirectToGoogle');
-Route::get('mycityperks/public/auth/google/callback', 'App\Http\Controllers\Auth\GoogleController@handleGoogleCallback');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
+
+Route::get('auth/google', '\App\Http\Controllers\Auth\GoogleController@redirectToGoogle');
+    Route::get('auth/google/callback', '\App\Http\Controllers\Auth\GoogleController@handleGoogleCallback');
+    
 
 // user
 Route::middleware(['auth', 'user'])->as('user.')->prefix('user')->group(function () {
@@ -45,6 +47,10 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
     Route::get('myaccount', [App\Http\Controllers\Customer\MyaccountController::class, 'index'])->name('myaccount');
     Route::post('myaccount/save', [App\Http\Controllers\Customer\MyaccountController::class, 'saveMyAccountData'])->name('savemyaccount');
     Route::post('change-password', [App\Http\Controllers\Customer\MyaccountController::class, 'updatePassword'])->name('change-password');
+    
+    Route::post('change-mobile', [App\Http\Controllers\Customer\MyaccountController::class, 'updateMobile'])->name('change-mobile');
+    
+    
     Route::post('getStateData', [App\Http\Controllers\Customer\MyaccountController::class, 'getStateData'])->name('getStateData');
     /* customer product section Start */
     
@@ -85,5 +91,11 @@ Route::middleware(['auth', 'customer'])->as('customer.')->prefix('customer')->gr
         Route::get('subscription-list', [App\Http\Controllers\Customer\SubscriptionController::class, 'index'])->name('subscription-list');
         Route::Post('getproductList', [App\Http\Controllers\Customer\SubscriptionController::class, 'getProductData'])->name('list');
     /* customer Subscription section start */
+    
+    
+    
+
+
+
     
 });

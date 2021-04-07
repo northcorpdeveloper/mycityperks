@@ -205,12 +205,23 @@ margin-top:30px;
                         <a class="nav-link" href="#">Explore <span class="sr-only">(current)</span></a>
                         </li>
                          <?php  $routeName = Route::currentRouteName();  $userId= Auth::user(); if(isset($userId) && !empty($userId)){ ?>
-                        
-                        
-                        
+                            
+                        <?php if($userId->user_type == 1){ ?>
+                          
+                         <li class="nav-item ">
+                        <i class="icon ion-ios-paper mobile-only"></i>
+                           <a href="{{ url('user/dashboard') }}"> Dashboard</a>
+                        </li>
+                        <?php }else{ ?>
+                         <li class="nav-item ">
+                        <i class="icon ion-ios-paper mobile-only"></i>
+                           <a href="{{ url('customer/dashboard') }}"> Dashboard</a>
+                        </li>
+                        <?php } ?>
+                            
                         <li class="nav-item ">
                         <i class="icon ion-ios-paper mobile-only"></i>
-                           <a href="{{ url('/logout') }}"> logout </a>
+                           <a href="{{ url('/logout') }}"> logout</a>
                         </li>
                          <?php }else{ ?>
                             <li class="nav-item">
@@ -296,7 +307,7 @@ margin-top:30px;
                            <a href="{{ url('/logout') }}"> logout </a>
                         </li>
                          <?php }else{ ?>
-                        <a class="btn color-1 size-1 hover-1"><i class="fa fa-facebook"></i>sign up via facebook</a>
+                        <a href="{{ url('auth/google') }}" class="btn color-1 size-1 hover-1"><i class="fa fa-google"></i>Sign in via Google</a>
                         <a class="be-register btn color-3 size-1 hover-6" data-toggle="modal" data-target="#signupModal"><i class="fa fa-lock"></i>sign up with email</a>  
             <?php } ?>
                             
@@ -682,20 +693,20 @@ var masonryPreloader = document.querySelector('.masonry-preloader');
                            }
                            
                            var imgPath=''
-                           imgPath ='http://localhost/mycityperks/public/assetcityfront/images/'+item.image;
+                           imgPath ='https://mycityperks.com/assetcityfront/images/'+item.image;
                            
                         html += '<div class="wow category-1 mix custom-column-5 " data-wow-duration="2s"><div class="be-post"><a href="page1.html" class="be-img-block"><div style="max-height:172px;">';
                         html += '<img src="'+imgPath+'" alt="omg"></div></a>';
                         html += ' <a href="#" class="be-post-title">'+item.name+'</a>';
                         html += '<span style="min-height: 40px;">'+shortcontent+'</span>';
                         html += '<div class="author-post">';
-                        html += '<img src="http://localhost/mycityperks/public/assetcityfront/images/a1.png" alt="" class="ava-author">';
+                        html += '<img src="https://mycityperks.com/assetcityfront/images/a1.png" alt="" class="ava-author">';
                         html +='<span>by <a href="page1.html">'+item.username+'</a></span>'; 
                         html +='</div><div class="info-block">';
                         html +='<span><i class="fa fa-thumbs-o-up"></i> 360</span>';
                         html +='<span><i class="fa fa-eye"></i> 789</span>';
                         html +='<span><i class="fa fa-comment-o"></i> 20</span>';
-                        html +='<span style="float: right; font-size: 20px;"><i class="fa fa-rupee"></i>'+item.price+'</span>';
+                        html +='<span style="float: right; font-size: 20px;">$ '+item.price+'</span>';
                         html +='</div></div></div>'; 
                     });
                     
