@@ -34,9 +34,6 @@ class HomeController extends Controller
        
         $homeCatArrayData = HomeCategory::select('name','id', 'cat_key')->where('order','<=', '4')->get();	       
         $homeCatMoreArrayData = HomeCategory::select('cat_key','name','id')->where('order','>', '4')->get();	 
-
-        
-        
         return view('home',compact('productList','allcount','PopularCategory','homeCatArrayData','homeCatMoreArrayData'));
     }
     

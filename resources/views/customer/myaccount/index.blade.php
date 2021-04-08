@@ -384,11 +384,14 @@
                                     </div>
                                     </form>
                                     <div>`
-                                        
+                                        <div>
+                                            <span id="verifySuccessMessage"></span>
+                                            
+                                        </div> 
                                         <br>
                                         
                                       Didn't receive the code?<br />
-                                      <a href="#">Send code again</a><br />
+                                      <a href="">Send code again</a><br />
                                     </div>
                                     
                                   </div>
@@ -444,7 +447,12 @@ $("#sendOTPbtn").click(function(e) {
                     "mobileno":mobileno
             },
         success: function(result) {
-            alert('ok');
+            jQuery("#verifySuccessMessage").html(result.message).show();
+            
+             setTimeout(function(){ jQuery("#verifySuccessMessage").html('').hide(); }, 3000);
+    
+    
+    
         },
         error: function(result) {
             alert('error');
@@ -545,8 +553,12 @@ $(function() {
            success:function(res){ 
                         
                         $("#verify-phone")[0].reset();
+                        jQuery("#verifySuccessMessage").html(res.message).show();
                         
-                        alert(res);
+                        window.setTimeout(function(){
+                            window.location.href = "https://mycityperks.com/customer/myaccount";
+                        }, 3000);
+             
                         
                         /*
                         if(res.status == 'fail'){

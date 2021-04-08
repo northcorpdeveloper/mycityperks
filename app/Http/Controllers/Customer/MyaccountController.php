@@ -170,7 +170,7 @@ class MyaccountController extends Controller
             $otpcode = $request->otpcode;
             $mobileno = "+91".$request->mobileno;
             
-            $client->messages->create(
+           $ress= $client->messages->create(
             // the number you'd like to send the message to
                 $mobileno ,
            array(
@@ -180,6 +180,13 @@ class MyaccountController extends Controller
                  'body' => 'Verification Code is '.$otpcode
              )
          );
+           
+         if($ress){
+             return response(array('httpStatus'=>200, 'dateTime'=>time(), 'status'=>'success','message' => 'verification code send Successfully'),200); 
+         }else{
+             return response(array('httpStatus'=>201, 'dateTime'=>time(), 'status'=>'fail','message' => 'Wrong OTP'),201); 
+         }  
+           
             
         }catch (Exception $e){
             echo "Error: " . $e->getMessage();

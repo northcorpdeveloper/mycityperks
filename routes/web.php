@@ -32,6 +32,11 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('auth/google', '\App\Http\Controllers\Auth\GoogleController@redirectToGoogle');
     Route::get('auth/google/callback', '\App\Http\Controllers\Auth\GoogleController@handleGoogleCallback');
     
+// Admin
+    Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
+    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');		
+});
+
 
 // user
 Route::middleware(['auth', 'user'])->as('user.')->prefix('user')->group(function () {

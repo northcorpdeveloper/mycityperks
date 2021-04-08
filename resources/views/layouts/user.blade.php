@@ -34,6 +34,46 @@
 
   </script>
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+<style>
+
+.srch .searchh {
+    max-width:100%;
+    color:#fff;
+  }
+  
+  input#Go {
+    color: #fff;
+    padding: 2px 11px !important;
+    border-radius: 0 5px 5px 0;
+    margin-left: -8px;
+    background: grey !important;
+    cursor: pointer;
+}
+
+form.form-inline.my-2.my-lg-0.ml-8.form-group.has-search {
+    width: 65%;
+    text-align: center;
+    margin-left: 11%;
+}
+
+
+  
+@media only screen and ( max-width: 680px ) {
+  .srch .searchh {
+    max-width:100%;
+    color:#fff;
+  }
+input#Go {
+    color: #fff;
+    padding: 2px 11px !important;
+    border-radius: 0 5px 5px 0;
+    margin-left: -3px;
+    background: grey !important;
+    cursor: pointer;
+}
+
+
+</style>
 
 </head>
 <body>
@@ -117,62 +157,46 @@
 				</div>
 
 				<!-- Actual search box -->
-				<form class="form-inline my-2 my-lg-0 ml-8 form-group has-search">
-					<span class="fa fa-search form-control-feedback"></span>
-					<input type="text" class="form-control mr-sm-2 searchh" placeholder="Search for Perks">
-					<input type="text" class="form-control mr-sm-2 nearr" placeholder="Nearby">
-					<input type="submit" class="form-control mr-sm-2" name="Go" value="Go" id="Go">
-				</form>
+                            <form class="form-inline my-2 my-lg-0 ml-8 form-group has-search">
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                    <input type="text" class="form-control mr-sm-2 searchh" style="color: white;" placeholder="Search for Perks">  <!--
+                                    <input type="text" class="form-control mr-sm-2 nearr" placeholder="Nearby"> -->
+                                    <input type="submit" class="form-control mr-sm-2" name="Go" value="Go" id="Go">
+                            </form>
 			</nav>
 		</div>
 		
 		<div class="container-fluid cd-main-content custom-container">
-			<div class="row">
-				<div class="col-md-12">
-<div class="submenu">
-<ul>
-<li><a href="#">cars &amp; Tructs</a></li>
-<li><a href="#">Lorem Ispum</a></li>
-<li><a href="#">Furniture</a></li>
-<li><a href="#">Baby &amp; Kids</a></li>
-<li class="moresub"><a href="#">More</a><i class="fa fa-caret-down"></i>
-
-<ul class="submenuarea">
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-<li><a href="#">Nav Menu Item</a></li>
-</ul></li>
-
-</ul>
-
-</div>
-</div>
-</div>
-</div>
+		    <div class="row">
+		        <div class="col-md-12">
+                            <div class="submenu">
+                                <ul>
+                                    @foreach($homeCatArrayData as $catList)
+                                        <li><a href="{{ $catList->cat_key }}">{{ $catList->name }}</a></li>             
+                                    @endforeach
+                                    
+                                    <li class="moresub"><a href="#">More</a><i class="fa fa-caret-down"></i>
+                                        <ul class="submenuarea">
+                                            @foreach($homeCatMoreArrayData as $catMoreList)
+                                                <li><a href="{{ $catMoreList->cat_key }}">{{ $catMoreList->name }}</a></li>    
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 	</header>
 
-<div class="container-fluid cd-main-content custom-container">
+    <div class="container-fluid cd-main-content custom-container">
 	<section class="">
-		<div class="most-left-section col-md-2" style="position:static;">
-
-
-
-
-
+	    <div class="most-left-section col-md-2" style="position:static;">
 		<div class="profile-card">
-				<img src="images/user-1.jpg" alt="user" class="profile-photo">
-				<h5><a href="#" class="text-white">Sarah Cruiz</a></h5>
-				<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
-			</div>
+                    <img src="images/user-1.jpg" alt="user" class="profile-photo">
+                    <h5><a href="#" class="text-white">Sarah Cruiz</a></h5>
+                    <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+		</div>
 			<!--profile card ends-->
 			<ul class="nav-news-feed">
 				<li><i class="icon ion-ios-paper"></i>

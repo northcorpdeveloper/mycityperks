@@ -317,8 +317,8 @@ margin-top:30px;
                            <a href="{{ url('/logout') }}"> logout </a>
                         </li>
                          <?php }else{ ?>
-                        <a href="{{ url('auth/google') }}" class="btn color-1 size-1 hover-1"><i class="fa fa-google"></i>Sign in via Google</a>
-                        <a class="be-register btn color-3 size-1 hover-6" data-toggle="modal" data-target="#signupModal"><i class="fa fa-lock"></i>sign up with email</a>  
+                        <a href="{{ url('auth/google') }}" class="btn color-1 size-1 hover-1"><i class="fa fa-google"></i>Sign-up via Google</a>
+                        <a class="be-register btn color-3 size-1 hover-6" data-toggle="modal" data-target="#signupModal"><i class="fa fa-lock"></i>sign-up via email</a>  
             <?php } ?>
                             
                             
