@@ -34,7 +34,8 @@ Route::get('auth/google', '\App\Http\Controllers\Auth\GoogleController@redirectT
     
 // Admin
     Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
-    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');		
+    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('user-list', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user-list');
 });
 
 

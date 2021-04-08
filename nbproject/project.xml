@@ -8,7 +8,9 @@
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>countriesList</word>
             <word>enderror</word>
+            <word>endforeach</word>
             <word>foreach</word>
+            <word>js</word>
         </spellchecker-wordlist>
     </configuration>
 </project>
