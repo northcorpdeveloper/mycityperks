@@ -1,0 +1,10 @@
+.form-control {
+        border: 0px !important;
+        border-radius: 0px !important;
+        background-color: transparent;
+        border-bottom: 1px solid #d1d3e2 !IMPORTANT;
+   }
+   #customer-profile {
+   		margin-bottom: 100px;
+
+   }

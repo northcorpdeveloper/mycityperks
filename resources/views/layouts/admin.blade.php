@@ -1,242 +1,134 @@
-<!doctype html>
-<html class="no-js" lang="en">
-<!--<![endif]-->
+<!-- end edit table -->
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My City - HTML5 Admin Template</title>
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
+    <title>Admin Dashboard</title>
 
-    <link rel="stylesheet" href="vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
-    
-    
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-  
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>var ROOT_PATH = "{{url('/')}}"; </script>
-    
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/custom-style.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="page-top">
 
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    <!-- Left Panel -->
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('admin/dashboard') }}">
+                <div class="sidebar-brand-icon">
+                    <img src="https://mycityperks.com/assetcityfront/images/logo.png" alt="" style="max-width: 167px;">
+                </div>
+<!--                <div class="sidebar-brand-text mx-3">Admin</div>-->
+            </a>
 
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="./"><img src="images/newlogo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="images/newlogo.png" alt="Logo"></a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('admin/dashboard') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
             </div>
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-
-                    <li class="">
-                        <a href="">WELCOME SAND TEST</a>
-                    </li>
-                    <h3 class="menu-title"></h3><!-- /.menu-title -->
-                    <li class="active">
-                        <a href="{{url('customer/dashboard')}}"> <i class="menu-icon fa fa-desktop"></i>Dashboard </a>
-                    </li>
-                    <li class="">
-                        <a href="{{url('customer/myaccount')}}"> <i class="menu-icon fa fa-dashboard"></i>My Account </a>
-                    </li>
-                    <li class="">
-                        <a href="{{url('customer/order-list')}}"> <i class="menu-icon fa fa-shopping-cart"></i>Orders </a>
-                    </li>
-                    <li class="">
-                        <a href="{{url('customer/deposit')}}"> <i class="menu-icon fa fa-money"></i>Add Deposit </a>
-                    </li>
-                    <li class="">
-                        <a href="{{url('customer/withdraw')}}"> <i class="menu-icon fa fa-credit-card"></i>Withdraw </a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Products</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="{{url('customer/addproduct')}}">Add Product</a></li>
-                            <li><i class="fa fa-table"></i><a href="{{url('customer/list')}}">Products</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="{{url('customer/transactions')}}"> <i class="menu-icon fa fa-credit-card"></i>Transactions </a>
-                    </li>
-                    <li class="">
-                        <a href="{{url('customer/subscription-list')}}"> <i class="menu-icon fa fa-dashboard"></i>Subscriptions </a>
-                    </li>
-              
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
-        <header id="header" class="header">
-
-            <div class="header-menu">
-
-                <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                    <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
-
-                        <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">5</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
-                            </a>
-                            </div>
-                        </div>
-
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.php">Login</a>
+                        <a class="collapse-item" href="register.php">Register</a>
+                        <a class="collapse-item" href="forgot-password.php">Forgot Password</a>
                     </div>
                 </div>
+            </li>
 
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
-                        </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
-
-                            <a class="nav-link" href="{{ url('/logout') }}"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
-                    <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
-                            <i class="flag-icon flag-icon-us"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="language">
-                            <div class="dropdown-item">
-                                <span class="flag-icon flag-icon-fr"></span>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-es"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-us"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-it"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
-        
-        
-        
-            
-    @yield('content')
-    
-        
-        
-    </div><!-- /#right-panel -->
+        </ul>
+        <!-- End of Sidebar -->
 
-    <!-- Right Panel -->
+        @yield('content')
 
- 
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-    <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
-    <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/widgets.js"></script>
-    <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    
-    
-    
-    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="vendors/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
-    
-    
-    <script>
-        (function($) {
-            "use strict";
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/admin/logout.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            jQuery('#vmap').vectorMap({
-                map: 'world_en',
-                backgroundColor: null,
-                color: '#ffffff',
-                hoverOpacity: 0.7,
-                selectedColor: '#1de9b6',
-                enableZoom: true,
-                showTooltip: true,
-                values: sample_data,
-                scaleColors: ['#1de9b6', '#03a9f5'],
-                normalizeFunction: 'polynomial'
-            });
-        })(jQuery);
-    </script>
-    
-    @yield('scripts')
+   
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 
