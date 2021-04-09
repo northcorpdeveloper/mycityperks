@@ -6,7 +6,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h4 style="color: #4e73df;">Admin Dashboard <button data-toggle="modal" data-target="#adminuser" class="btn btn-primary">Add Admin Profile</button></h4><br/>
+                    <h4 style="color: #4e73df;">User List <!--<button data-toggle="modal" data-target="#adminuser" class="btn btn-primary">Add Admin Profile</button> --></h4><br/>
 
                     
             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -37,15 +37,18 @@
                   }else{
                   $user_type="Admin";
                    } 
-
                    ?> 
                   <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $user_list->name}}</td>
                     <td>{{ $user_list->email}}</td>
                     <td>{{ $user_list->mobile}}</td>  
-                    <td>{{ $user_type}}</td>  
-                    <td><a href="edit_record.php?id={{ $user_list->id}}" class="btn btn-success">Edit</a> <a href="delete.php?id={{ $user_list->id}}" class="btn btn-danger">Delete</a></td>
+                    <td>{{ $user_type}}</td>
+                    <td>
+                        <i data="<?php echo $user_list->id; ?>" class="status_checks btn
+  <?php echo ($user_list->status)? 'btn-success': 'btn-danger'?>"><?php echo ($user_list->status)? 'Active' : 'Inactive' ?>
+ </i></td>
+
                   </tr> 
                    <?php $i++; ?>
                   @endforeach
@@ -88,5 +91,35 @@
             </div>
         </div>
     </div>
+
+                
+ <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+$(document).on('click','.status_checks',function(){
+      var status = ($(this).hasClass("btn-success")) ? '0' : '1';
+      var msg = (status=='0')? 'Deactivate' : 'Activate';
+      if(confirm("Are you sure to "+ msg)){
+        var current_element = $(this);
+        url = "{{url('admin/updateStatus')}}";
+        
+          $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                data: {
+                        "_token": "{{ csrf_token() }}",   
+                        "id":$(current_element).attr('data'),
+                        "status":status
+                
+                },
+                success:function(data)
+                {
+                     location.reload();
+                },
+                
+            });
+      }      
+    });
+</script>
 
 @stop

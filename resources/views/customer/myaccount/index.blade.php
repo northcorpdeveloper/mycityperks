@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-      <div class="col-sm-12">
+            <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert" style="display:none" id="updateDataErrorMessage">
                    You are successfully logged in to dashboard.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -128,6 +128,8 @@
                     </button>
                 </div>
             </div>
+      
+           
         </div>
 
         <div class="content mt-3">
@@ -137,6 +139,14 @@
                     
                     
                 <div class="col-lg-6">
+                    
+                     @if(session()->has('message'))
+                        <div class="alert alert-success redirectMessagteForPhone">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+            
+            
                 <div class="card">
                 <div class="card-header" style="color:#00FF00;font-weight:bold;">Personal Information</div>
 													             
@@ -675,6 +685,14 @@ $( document ).ready(function() {
     });
 </script>    
  
+
+<script>
+  window.setTimeout(function() {
+    $(".redirectMessagteForPhone").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 3000);
+</script>
 @endsection
 
 @section('scripts')

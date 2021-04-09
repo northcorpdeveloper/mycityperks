@@ -2,45 +2,58 @@
 @section('title', ' Dashboard | mycityperks.com')
 
 @section('content')
+  
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h4 style="color: #4e73df;">Admin Dashboard <button data-toggle="modal" data-target="#adminuser" class="btn btn-primary">Add Admin Profile</button></h4><br/>
+                    <h4 style="color: #4e73df;">Home Category </h4><br/>
 
-                    <table class="table table-bordered">
+                    
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                     <th scope="col">Sr.No.</th>
                     <th scope="col">Full Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Contact</th>
                     <th scope="col">User Roll</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Action</th>
                    </tr>
                </thead>
+                <tbody>
+                   <?php $i=1; $user_type=''; ?>
 
-        <?php
+                       <?php //print_r($all_users); die; ?>
+                  @if(isset($all_users) && !empty($all_users))
 
-       /* $records = mysqli_query($link,"select * from fan_register"); // fetch data from database
+                  @foreach($all_users as $user_list)
 
-        while($data = mysqli_fetch_array($records))
-        {
-        ?>
-          <tr>
-            <td><?php echo $data['id']; ?></td>
-            <td><?php echo $data['first_name'].' '.$data['last_name']; ?></td>
-            <td><?php echo $data['email']; ?></td>
-            <td><?php echo $data['password']; ?></td>  
-            <td><?php echo $data['roll']; ?></td>  
-            <td><a href="edit_record.php?id=<?php echo $data['id']; ?>" class="btn btn-success">Edit</a></td>
-            <td><a href="delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">Delete</a></td>
-          </tr> 
-        <?php
-        }*/
-        ?>
-        </table>
 
-                </div>
+                  <?php 
+                  if($user_list->user_type == '1'){
+                  $user_type="User";
+                  }else if($user_list->user_type == '2'){
+                  $user_type="Content Creator";
+                  }else{
+                  $user_type="Admin";
+                   } 
+
+                   ?> 
+                  <tr>
+                    <td>{{ $i }}</td>
+                    <td>{{ $user_list->name}}</td>
+                    <td>{{ $user_list->email}}</td>
+                    <td>{{ $user_list->mobile}}</td>  
+                    <td>{{ $user_type}}</td>  
+                    <td><a href="id={{ $user_list->id}}" class="btn btn-success">Edit</a> <a href="delete.php?id={{ $user_list->id}}" class="btn btn-danger">Delete</a></td>
+                  </tr> 
+                   <?php $i++; ?>
+                  @endforeach
+                  @endif
+                </tbody>
+            </table>
+                    <br><br><br>     
+        </div>
                  
 
     <div class="modal fade" id="adminuser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
